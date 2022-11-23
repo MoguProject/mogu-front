@@ -4,6 +4,7 @@ import Footer from '../components/Layout/Footer';
 import CardState from '../components/common/CardState';
 import CardTags from '../components/common/CardTags';
 import Image from 'next/image';
+import StudyDesktopCard from '../components/common/card/study/StudyDesktopCard';
 
 const Home: NextPage = () => {
   return (
@@ -27,6 +28,7 @@ const Home: NextPage = () => {
         width={24}
         height={24}
       />
+      <StudyDesktopCard state={true} likeState={true} />
     </>
   );
 };
