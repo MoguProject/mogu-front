@@ -8,12 +8,14 @@ export const StudyCardWrapper = styled.div`
   gap: 10px;
   width: 253px;
   height: 193px;
+  padding: 10px;
 `;
 
 export const StudyCardTop = styled.div`
+  width: 100%;
   display: flex;
   align-items: center;
-  gap: 170px;
+  justify-content: space-between;
 `;
 
 export const StudyCardBottom = styled.div`

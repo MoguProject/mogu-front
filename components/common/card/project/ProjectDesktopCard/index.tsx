@@ -26,7 +26,7 @@ const ProjectDesktopCard = ({ data }: { data: ProjectDummyData }) => {
       />
       <TagsWrapper>
         {data.categories.map((category) => (
-          <CardTags tag={category} />
+          <CardTags tag={category} key={category} />
         ))}
         <CardState state={data.state} />
       </TagsWrapper>

@@ -38,8 +38,10 @@ const ProjectMobileCard = ({ data }: { data: ProjectDummyData }) => {
         {data.categories.length > 2
           ? data.categories
               .slice(0, 3)
-              .map((category) => <CardTags tag={category} />)
-          : data.categories.map((category) => <CardTags tag={category} />)}
+              .map((category) => <CardTags tag={category} key={category} />)
+          : data.categories.map((category) => (
+              <CardTags tag={category} key={category} />
+            ))}
       </TagsWrapper>
       <TotalUser>
         모집인원 {data.currentUser} / {data.totalUser}
