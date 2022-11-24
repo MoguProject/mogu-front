@@ -26,15 +26,15 @@ const StudyDesktopCard = ({
           <Image
             src={'/images/icon/heart_active.svg'}
             alt="heart"
-            width={24}
-            height={24}
+            width={20}
+            height={18}
           />
         ) : (
           <Image
             src={'/images/icon/heart.svg'}
             alt="heart"
-            width={24}
-            height={24}
+            width={20}
+            height={18}
           />
         )}
       </StudyCardTop>
