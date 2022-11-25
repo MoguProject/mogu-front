@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import CardCarousel from '../CardCarousel';
 import ProjectDesktopCard from '../../common/card/project/ProjectDesktopCard';
-import StudyDesktopCard from '../../common/card/study/StudyDesktopCard';
+import StudyCard from '../../common/card/study/StudyCard';
 import type { ProjectDummyData } from '../../../pages';
 const MainNewContentWrapper = styled.div`
   max-width: 1140px;
@@ -47,14 +47,14 @@ const MainNewContent = ({ category }: { category: string }) => {
         <>
           <MainNewContentTitle>새롭게 모집하는 스터디</MainNewContentTitle>
           <CardCarousel>
-            <StudyDesktopCard state={true} likeState={false} />
-            <StudyDesktopCard state={true} likeState={false} />
-            <StudyDesktopCard state={true} likeState={false} />
-            <StudyDesktopCard state={true} likeState={false} />
-            <StudyDesktopCard state={true} likeState={false} />
-            <StudyDesktopCard state={true} likeState={false} />
-            <StudyDesktopCard state={true} likeState={false} />
-            <StudyDesktopCard state={true} likeState={false} />
+            <StudyCard state={true} likeState={false} />
+            <StudyCard state={true} likeState={false} />
+            <StudyCard state={true} likeState={false} />
+            <StudyCard state={true} likeState={false} />
+            <StudyCard state={true} likeState={false} />
+            <StudyCard state={true} likeState={false} />
+            <StudyCard state={true} likeState={false} />
+            <StudyCard state={true} likeState={false} />
           </CardCarousel>
         </>
       )}
