@@ -11,7 +11,7 @@ import {
   StudyCardMemberNum,
 } from './styled';
 
-const StudyDesktopCard = ({
+const StudyCard = ({
   state,
   likeState,
 }: {
@@ -53,4 +53,4 @@ const StudyDesktopCard = ({
   );
 };
 
-export default StudyDesktopCard;
+export default StudyCard;

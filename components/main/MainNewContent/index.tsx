@@ -1,8 +1,9 @@
 import styled from 'styled-components';
 import CardCarousel from '../CardCarousel';
 import ProjectDesktopCard from '../../common/card/project/ProjectDesktopCard';
-import StudyDesktopCard from '../../common/card/study/StudyDesktopCard';
-import type { ProjectDummyData } from '../../../pages';
+import StudyCard from '../../common/card/study/StudyCard';
+import { ProjectDummyData } from '../../../dummy/ProjectsData';
+
 const MainNewContentWrapper = styled.div`
   max-width: 1140px;
   margin: 0 auto;
@@ -19,6 +20,7 @@ const MainNewContentTitle = styled.h1`
 
 const MainNewContent = ({ category }: { category: string }) => {
   const ProjectDummyData: ProjectDummyData = {
+    id: 0,
     title: 'React + Spring 스터디 / 프로젝트 모집 사이트 같이 만드실분',
     categories: ['React', 'Typescript', 'MySQL', 'NodeJs', 'Spring'],
     state: true,
@@ -47,14 +49,14 @@ const MainNewContent = ({ category }: { category: string }) => {
         <>
           <MainNewContentTitle>새롭게 모집하는 스터디</MainNewContentTitle>
           <CardCarousel>
-            <StudyDesktopCard state={true} likeState={false} />
-            <StudyDesktopCard state={true} likeState={false} />
-            <StudyDesktopCard state={true} likeState={false} />
-            <StudyDesktopCard state={true} likeState={false} />
-            <StudyDesktopCard state={true} likeState={false} />
-            <StudyDesktopCard state={true} likeState={false} />
-            <StudyDesktopCard state={true} likeState={false} />
-            <StudyDesktopCard state={true} likeState={false} />
+            <StudyCard state={true} likeState={false} />
+            <StudyCard state={true} likeState={false} />
+            <StudyCard state={true} likeState={false} />
+            <StudyCard state={true} likeState={false} />
+            <StudyCard state={true} likeState={false} />
+            <StudyCard state={true} likeState={false} />
+            <StudyCard state={true} likeState={false} />
+            <StudyCard state={true} likeState={false} />
           </CardCarousel>
         </>
       )}

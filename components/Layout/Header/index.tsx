@@ -8,16 +8,21 @@ import {
   HeaderRight,
   AuthNavWrapper,
 } from './styled';
+import Link from 'next/link';
 
 const Header = () => {
   return (
     <HeaderWrapper>
       <HeaderStyled>
         <HeaderLeft>
-          <Logo>Mogu</Logo>
+          <Logo>
+            <Link href="/">Mogu</Link>
+          </Logo>
           <HeaderNav>
             <HeaderNavList>
-              <li>프로젝트 / 스터디</li>
+              <li>
+                <Link href="/projects">프로젝트 / 스터디</Link>
+              </li>
               <li>커뮤니티</li>
             </HeaderNavList>
           </HeaderNav>
