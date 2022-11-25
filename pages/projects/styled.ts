@@ -32,3 +32,17 @@ export const HeaderNavList = styled.ul`
     } // 나중에 Active시 색상변경으로 업데이트 예정
   }
 `;
+
+export const FilterBoxWrapper = styled.div`
+  margin-bottom: 10px;
+`;
+
+export const ProjectsList = styled.section`
+  margin: 0 auto;
+  max-width: 1140px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 28px;
+`;
