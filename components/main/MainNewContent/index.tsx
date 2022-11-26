@@ -3,6 +3,7 @@ import CardCarousel from '../CardCarousel';
 import ProjectDesktopCard from '../../common/card/project/ProjectDesktopCard';
 import StudyCard from '../../common/card/study/StudyCard';
 import { ProjectDummyData } from '../../../dummy/ProjectsData';
+import { StudyDummyData } from '../../../dummy/StudyData';
 
 const MainNewContentWrapper = styled.div`
   max-width: 1140px;
@@ -29,6 +30,15 @@ const MainNewContent = ({ category }: { category: string }) => {
     like: 20,
     imgUrl: '/images/dummy_image.png',
   };
+  const StudyDummyData: StudyDummyData = {
+    id: 0,
+    subTitle: '프론트엔드 자바스크립트 / 웹 개발',
+    title: '자바스크립트 딥다이브 스터디 모집합니다.',
+    content:
+      'Lorem Ipsum is simply dummy text of the printing and type setting industry. Lorem Ipsum has been ...',
+    totalUser: 4,
+    currentUser: 2,
+  };
   return (
     <MainNewContentWrapper>
       {category === 'project' ? (
@@ -49,14 +59,14 @@ const MainNewContent = ({ category }: { category: string }) => {
         <>
           <MainNewContentTitle>새롭게 모집하는 스터디</MainNewContentTitle>
           <CardCarousel>
-            <StudyCard state={true} likeState={false} />
-            <StudyCard state={true} likeState={false} />
-            <StudyCard state={true} likeState={false} />
-            <StudyCard state={true} likeState={false} />
-            <StudyCard state={true} likeState={false} />
-            <StudyCard state={true} likeState={false} />
-            <StudyCard state={true} likeState={false} />
-            <StudyCard state={true} likeState={false} />
+            <StudyCard state={true} likeState={false} data={StudyDummyData} />
+            <StudyCard state={true} likeState={false} data={StudyDummyData} />
+            <StudyCard state={true} likeState={false} data={StudyDummyData} />
+            <StudyCard state={true} likeState={false} data={StudyDummyData} />
+            <StudyCard state={true} likeState={false} data={StudyDummyData} />
+            <StudyCard state={true} likeState={false} data={StudyDummyData} />
+            <StudyCard state={true} likeState={false} data={StudyDummyData} />
+            <StudyCard state={true} likeState={false} data={StudyDummyData} />
           </CardCarousel>
         </>
       )}
