@@ -1,18 +1,20 @@
 import RegisterButton from '../../common/button/register';
 import { HeaderWrapper, HeaderStyled, HeaderNavList } from './styled';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
-const ProjectStudyHeader = () => {
+const ProjectStudyDesktopHeader = () => {
+  const router = useRouter();
   return (
     <HeaderWrapper>
       <HeaderStyled>
         <nav>
           <HeaderNavList>
-            <li>
-              <Link href="/projects">전체 프로젝트</Link>
+            <li className={router.pathname === '/projects' ? 'active' : ''}>
+              <Link href="/projects">프로젝트</Link>
             </li>
-            <li>
-              <Link href="/study">전체 스터디</Link>
+            <li className={router.pathname === '/study' ? 'active' : ''}>
+              <Link href="/study">스터디</Link>
             </li>
           </HeaderNavList>
         </nav>
@@ -22,4 +24,4 @@ const ProjectStudyHeader = () => {
   );
 };
 
-export default ProjectStudyHeader;
+export default ProjectStudyDesktopHeader;

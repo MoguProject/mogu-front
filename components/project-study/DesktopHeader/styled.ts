@@ -27,8 +27,11 @@ export const HeaderNavList = styled.ul`
     color: ${(props) => props.theme.colors.primary};
     cursor: pointer;
 
-    :nth-child(1) {
+    :hover {
       color: ${(props) => props.theme.colors.red};
-    } // 나중에 Active시 색상변경으로 업데이트 예정
+    }
+  }
+  li.active {
+    color: ${(props) => props.theme.colors.red};
   }
 `;
