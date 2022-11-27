@@ -15,6 +15,7 @@ const GlobalStyles = createGlobalStyle`
   }
   body {
     font-family: 'Noto Sans KR', sans-serif;
+    height: 100%;
   }
   input, textarea { 
     -moz-user-select: auto;
