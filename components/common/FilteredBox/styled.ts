@@ -8,6 +8,7 @@ export const ProjectsFilter = styled.form`
   align-items: center;
   margin: 0 auto;
   padding: 0 10px;
+  flex-wrap: wrap;
 
   select {
     margin-right: 10px;

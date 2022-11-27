@@ -20,5 +20,4 @@ const FilteredBox = () => {
     </ProjectsFilter>
   );
 };
-// 기술 스택에 대한 종류와 선택 방식에 대해서 논의 후 코드 추가 예정
 export default FilteredBox;

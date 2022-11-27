@@ -12,8 +12,7 @@ import {
   ProjectDesktopCardLikeText,
   ProjectDesktopCardLike,
 } from './styled';
-
-import type { ProjectDummyData } from '../../../../../pages';
+import type { ProjectDummyData } from '../../../../../dummy/ProjectsData';
 
 const ProjectDesktopCard = ({ data }: { data: ProjectDummyData }) => {
   return (

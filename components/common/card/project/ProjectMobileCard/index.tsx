@@ -11,8 +11,7 @@ import {
   TotalUser,
 } from './styled';
 
-import type { ProjectDummyData } from '../../../../../pages';
-
+import type { ProjectDummyData } from '../../../../../dummy/ProjectsData';
 const ProjectMobileCard = ({ data }: { data: ProjectDummyData }) => {
   return (
     <ProjectMobilCardWrapper>

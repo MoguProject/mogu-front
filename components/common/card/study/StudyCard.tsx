@@ -10,11 +10,14 @@ import {
   StudyCardContents,
   StudyCardMemberNum,
 } from './styled';
+import { StudyDummyData } from '../../../../dummy/StudyData';
 
 const StudyCard = ({
   state,
   likeState,
+  data,
 }: {
+  data: StudyDummyData;
   state: boolean;
   likeState: boolean;
 }) => {
@@ -39,15 +42,12 @@ const StudyCard = ({
         )}
       </StudyCardTop>
       <StudyCardBottom>
-        <StudyCardSubTitle>프론트엔드 자바스크립트 / 웹 개발</StudyCardSubTitle>
-        <StudyCardTitle>
-          자바스크립트 딥다이브 스터디 모집합니다.
-        </StudyCardTitle>
-        <StudyCardContents>
-          Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry. Lorem Ipsum has been ...
-        </StudyCardContents>
-        <StudyCardMemberNum>모집인원 2/4</StudyCardMemberNum>
+        <StudyCardSubTitle>{data.subTitle}</StudyCardSubTitle>
+        <StudyCardTitle>{data.title}</StudyCardTitle>
+        <StudyCardContents>{data.content}</StudyCardContents>
+        <StudyCardMemberNum>
+          {`모집인원 ${data.currentUser}/${data.totalUser}`}
+        </StudyCardMemberNum>
       </StudyCardBottom>
     </StudyCardWrapper>
   );

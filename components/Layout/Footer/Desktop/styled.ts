@@ -6,12 +6,7 @@ export const FooterWrapper = styled.footer`
   background-color: ${(props) => props.theme.colors.white};
   border-top: 2px solid ${(props) => props.theme.colors.border};
   color: ${(props) => props.theme.colors.primary};
-  position: absolute;
-  bottom: 0;
 `;
-// 하단 고정 코드 개선 필요
-// position: absolute;
-// bottom: 0;
 
 export const FooterStyled = styled.div`
   width: 100%;
