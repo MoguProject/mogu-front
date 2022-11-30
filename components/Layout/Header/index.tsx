@@ -29,8 +29,12 @@ const Header = () => {
         </HeaderLeft>
         <HeaderRight>
           <AuthNavWrapper>
-            <li>회원가입</li>
-            <li>로그인</li>
+            <li>
+              <Link href={'/auth/signup'}>회원가입</Link>
+            </li>
+            <li>
+              <Link href={'/auth/login'}>로그인</Link>
+            </li>
           </AuthNavWrapper>
         </HeaderRight>
       </HeaderStyled>
