@@ -35,3 +35,14 @@ export const HeaderNavList = styled.ul`
     color: ${(props) => props.theme.colors.red};
   }
 `;
+
+export const RecruitButtonWrapper = styled.button`
+  padding: 8px 30px;
+  color: ${(props) => props.theme.colors.secondary};
+  border: 1px solid ${(props) => props.theme.colors.border};
+  border-radius: 4px;
+  :hover {
+    background-color: ${(props) => props.theme.colors.green};
+    color: ${(props) => props.theme.colors.white};
+  }
+`;
