@@ -9,8 +9,10 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@uiw/react-md-editor": "^3.6.0",
     "axios": "^1.2.0",
     "next": "13.0.4",
+    "next-remove-imports": "^1.0.8",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-hook-form": "^7.39.5",
