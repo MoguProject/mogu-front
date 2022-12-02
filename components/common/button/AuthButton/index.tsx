@@ -4,6 +4,7 @@ interface AuthButtonType {
   children: string;
   type: 'button' | 'submit' | 'reset' | undefined;
   disabled?: boolean | undefined;
+  onClick?: () => void;
 }
 
 const AuthButtonWrapper = styled.button`
@@ -12,7 +13,7 @@ const AuthButtonWrapper = styled.button`
   letter-spacing: -1%;
   color: #ffffff;
   font-weight: 700;
-  background-color: ${(props) => props.theme.colors.blue};
+  background-color: ${(props) => props.theme.colors.green};
   border-radius: 4px;
   border: none;
   outline: none;
@@ -28,9 +29,9 @@ const AuthButtonWrapper = styled.button`
   }
 `;
 
-const AuthButton = ({ children, type, disabled }: AuthButtonType) => {
+const AuthButton = ({ children, type, disabled, onClick }: AuthButtonType) => {
   return (
-    <AuthButtonWrapper disabled={disabled} type={type}>
+    <AuthButtonWrapper disabled={disabled} type={type} onClick={onClick}>
       {children}
     </AuthButtonWrapper>
   );

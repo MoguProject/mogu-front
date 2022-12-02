@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import Link from 'next/link';
 
-export const SignupWrapper = styled.form`
+export const SignupWrapper = styled.div`
   position: absolute;
   top: 50%;
   left: 50%;

@@ -12,6 +12,9 @@ const nextConfig = {
 
     return config;
   },
+  images: {
+    domains: ['frost0807.s3.ap-northeast-2.amazonaws.com'], // 외부 이미지 가져오는 config 설정
+  },
 };
 
 module.exports = nextConfig;
