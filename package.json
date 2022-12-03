@@ -9,11 +9,14 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@types/react-cookies": "^0.1.0",
     "@uiw/react-md-editor": "^3.6.0",
     "axios": "^1.2.0",
     "next": "13.0.4",
+    "next-cookies": "^2.0.3",
     "next-remove-imports": "^1.0.8",
     "react": "18.2.0",
+    "react-cookies": "^0.1.1",
     "react-dom": "18.2.0",
     "react-hook-form": "^7.39.5",
     "react-query": "^3.39.2",

@@ -1,11 +1,15 @@
-import type { AppProps } from 'next/app';
-import { QueryClient, QueryClientProvider } from 'react-query';
+import type { AppContext, AppProps } from 'next/app';
+import { useState } from 'react';
+import { Hydrate, QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import { ThemeProvider } from 'styled-components';
 import { RecoilRoot } from 'recoil';
 import GlobalStyles from '../styles/globalStyle';
 import { theme } from '../styles/theme';
 import Head from 'next/head';
+import axios from 'axios';
+import cookies from 'next-cookies';
+import { setToken } from 'utils/setToken';
 
 function MyApp({ Component, pageProps }: AppProps) {
   const queryClient = new QueryClient();

@@ -2,7 +2,6 @@ import { NextPage } from 'next';
 import MainNewContent from '../components/main/MainNewContent';
 import Layout from '../components/Layout';
 import MainBottom from '../components/main/MainBottom';
-import { useIsMobile } from '../hooks/useIsMobile';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 

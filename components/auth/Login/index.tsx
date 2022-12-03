@@ -1,5 +1,6 @@
 import { useForm } from 'react-hook-form';
 import AuthButton from '../../common/button/AuthButton';
+import axios from 'axios';
 import {
   LabelStyled,
   LoginInput,
@@ -13,33 +14,22 @@ import {
 
 import { useMutation } from 'react-query';
 import { AxiosError } from 'axios';
-import { loginApi } from '../../../utils/user';
+import { loginApi } from '../../../utils/apis/user';
 import type { LoginSubmitData, UserLoginReturnData } from '../../../types';
-import useIsLoggedIn from 'hooks/useIsLoggedIn';
-import { useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { useRecoilState } from 'recoil';
-
+import { setToken } from 'utils/setToken';
 const Login = () => {
   const router = useRouter();
-  const isLoggedIn = useIsLoggedIn();
-  useEffect(() => {
-    if (isLoggedIn) {
-      alert('잘못된 접근 입니다.');
-      router.push('/');
-    }
-  }, [isLoggedIn]);
-
   const loginMutation = useMutation<
     UserLoginReturnData,
     AxiosError,
     LoginSubmitData
   >(loginApi, {
-    onSuccess: (data) => {
-      if (data.token) {
-        localStorage.setItem('user', JSON.stringify(data));
-        router.push('/');
-      }
+    onSuccess: (res) => {
+      const { token } = res;
+      setToken(token);
+      localStorage.setItem('access_token', token);
+      router.push('/');
     },
     onError: (error) => {
       alert(error.response?.data);
