@@ -6,19 +6,14 @@ import {
   CommunityHeaderSearch,
   CommunityHeaderSelect,
   CommunityHeaderSelectContent,
-  CommunityHeaderTitle,
-  CommunityHeaderTop,
   CommunityHeaderWrapper,
-  CommunityHeaderWrite,
 } from './styled';
+import CommunityHeaderTop from './top';
 
 const CommunityHeader = () => {
   return (
     <CommunityHeaderWrapper>
-      <CommunityHeaderTop>
-        <CommunityHeaderTitle>커뮤니티 페이지 🕹</CommunityHeaderTitle>
-        <CommunityHeaderWrite>글쓰기</CommunityHeaderWrite>
-      </CommunityHeaderTop>
+      <CommunityHeaderTop />
       <CommunityHeaderFilter>
         <CommunityHeaderSelect>
           <CommunityHeaderSelectContent active={true}>

@@ -23,7 +23,9 @@ const Header = () => {
               <li>
                 <Link href="/projects">프로젝트 / 스터디</Link>
               </li>
-              <li>커뮤니티</li>
+              <li>
+                <Link href="/community">커뮤니티</Link>
+              </li>
             </HeaderNavList>
           </HeaderNav>
         </HeaderLeft>
