@@ -11,10 +11,8 @@ import {
 import Link from 'next/link';
 import Image from 'next/image';
 import styled from 'styled-components';
-import { useEffect, useState } from 'react';
-import { axiosInstance, getJWTHeader } from 'axiosInstance';
-import { useRouter } from 'next/router';
-import { clearToken } from 'utils/setToken';
+import { useQuery } from 'react-query';
+import { loadMyInfo } from 'utils/apis/user';
 const ProfileCardImage = styled.div`
   width: 32px;
   height: 32px;
@@ -26,30 +24,10 @@ const ProfileCardImage = styled.div`
 `;
 
 const Header = () => {
-  const router = useRouter();
-  const [nickname, setNickname] = useState('');
-  const [profileImageUrl, setProfileImageUrl] = useState('');
-  const [isNotLoggedIn, setIsNotLoggedIn] = useState(false);
-  const onClickLogout = () => {
-    clearToken();
-    localStorage.removeItem('access_token');
-    setIsNotLoggedIn(true);
-  };
-  useEffect(() => {
-    const storeageToken = localStorage.getItem('access_token');
-    if (storeageToken && !isNotLoggedIn) {
-      axiosInstance
-        .get('/user/login/info', {
-          headers: getJWTHeader(storeageToken),
-        })
-        .then((response) => {
-          setNickname(response.data.nickname);
-          setProfileImageUrl(response.data.profileImageUrl);
-        });
-    } else {
-      setIsNotLoggedIn(true);
-    }
-  }, []);
+  const { data, isError } = useQuery(['user'], loadMyInfo, {
+    retry: 0,
+  });
+
   return (
     <HeaderWrapper>
       <HeaderStyled>
@@ -67,10 +45,8 @@ const Header = () => {
           </HeaderNav>
         </HeaderLeft>
         <HeaderRight>
-          {nickname && profileImageUrl && !isNotLoggedIn ? (
-            <div onClick={onClickLogout}>로그아웃</div>
-          ) : null}
-          {isNotLoggedIn ? (
+          {data ? <div>로그아웃</div> : null}
+          {isError ? (
             <AuthNavWrapper>
               <li>
                 <Link href={'/auth/signup'}>회원가입</Link>

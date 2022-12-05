@@ -1,15 +1,16 @@
-import axios from 'axios';
+import { axiosInstance } from 'axiosInstance';
 import { LoginSubmitData, SignupSubmitData } from 'types';
-import { backUrl } from '../../config/config';
-
-axios.defaults.baseURL = backUrl;
 
 export const loginApi = ({ email, password }: LoginSubmitData) => {
-  return axios
-    .post('/user/login', {
-      email,
-      password,
-    })
+  return axiosInstance
+    .post(
+      '/user/login',
+      {
+        email,
+        password,
+      },
+      {},
+    )
     .then((response) => response.data);
 };
 
@@ -20,7 +21,7 @@ export const signupApi = ({
   password,
   phone,
 }: SignupSubmitData) => {
-  return axios
+  return axiosInstance
     .post('/user/create', {
       email,
       name,
@@ -32,17 +33,13 @@ export const signupApi = ({
 };
 
 export const loadMyInfo = (token: any) => {
-  return axios
-    .get('/user/login/info', {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
+  return axiosInstance
+    .get('/user/login/info')
     .then((response) => response.data);
 };
 
 export const emailCertificateApi = (email: string) => {
-  return axios
+  return axiosInstance
     .post('/user/email/certificate', {
       email,
     })
@@ -50,5 +47,9 @@ export const emailCertificateApi = (email: string) => {
 };
 
 export const getMyPageUserDataApi = () => {
-  return axios.get('/user/mypage').then((response) => response.data);
+  return axiosInstance.get('/user/mypage').then((response) => response.data);
+};
+
+export const editProfileApi = ({ data, token }) => {
+  return axiosInstance.put('/user/update', {}).then((res) => res.data);
 };

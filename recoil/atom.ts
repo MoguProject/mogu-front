@@ -17,16 +17,3 @@ export const userCertValue = atom<string>({
   key: 'userCertificateValue',
   default: '',
 });
-
-export const myPageUserState = atom<any>({
-  key: 'myPageUserState',
-  default: {},
-});
-
-export const isLoggedInState = atom({
-  key: 'isLoggedIn',
-  default: {
-    nickname: '',
-    profileImageUrl: '',
-  },
-});

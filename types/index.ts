@@ -18,3 +18,13 @@ export interface UserLoginReturnData {
   profileImageUrl: string;
   token: string;
 }
+
+export interface MyPageEditSubmitData {
+  information: string;
+  isActivated: string | boolean;
+  nickname: string;
+  phone: string;
+  preferredMethod: string;
+  region: string;
+  skills: string[];
+}

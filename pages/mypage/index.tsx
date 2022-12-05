@@ -9,11 +9,9 @@ import {
   InferGetServerSidePropsType,
   NextPage,
 } from 'next';
-import cookies from 'next-cookies';
 import Image from 'next/image';
+import { axiosInstance } from 'axiosInstance';
 import { useEffect, useState, useCallback } from 'react';
-import { useRecoilState } from 'recoil';
-import { myPageUserState } from 'recoil/atom';
 import styled from 'styled-components';
 import { getMyPageUserDataApi } from 'utils/apis/user';
 
@@ -93,6 +91,7 @@ const ProfileImageEditButton = styled.button`
 const MyPage = ({
   data,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+  console.log(data);
   const [activeEditProfile, setActiveEditProfile] = useState(true);
   const [activeProjectStudy, setActiveProjectStudy] = useState(false);
   const [activeLiked, setActiveLiked] = useState(false);
@@ -130,12 +129,12 @@ const MyPage = ({
       <MyPageWrapper>
         <MyPageTopSection>
           <ProfileImageWrapper>
-            <Image
+            {/* <Image
               src={data.profileImageUrl}
               alt={'프로필사진'}
               width={100}
               height={100}
-            />
+            /> */}
           </ProfileImageWrapper>
           <ProfileNickname>{data.nickname}</ProfileNickname>
           <ProfileImageEditButton>프로필 이미지 수정</ProfileImageEditButton>
@@ -175,24 +174,23 @@ export const getServerSideProps: GetServerSideProps<{
   data: MyPageData;
 }> = async (context) => {
   const cookie = context.req ? context.req.headers.cookie : '';
-  axios.defaults.headers.common['Authorization'] = '';
+  axios.defaults.headers.Cookie = '';
   if (context.req && cookie) {
-    const allCookies = cookies(context);
-    const token = allCookies['access_token'];
-    axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-    const res: MyPageData = await getMyPageUserDataApi();
-
+    axios.defaults.headers.Cookie = cookie;
+    const res = await axiosInstance
+      .get('http://13.124.27.209:8080/user/mypage')
+      .then((response) => response.data);
+    console.log(res);
     return {
       props: {
         data: res,
       },
     };
-  } else {
-    return {
-      redirect: {
-        destination: '/',
-        permanent: true,
-      },
-    };
   }
+  return {
+    redirect: {
+      destination: '/',
+      permanent: false,
+    },
+  };
 };

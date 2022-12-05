@@ -1,4 +1,4 @@
-import { NextPage } from 'next';
+import { GetServerSideProps, NextPage } from 'next';
 import MainNewContent from '../components/main/MainNewContent';
 import Layout from '../components/Layout';
 import MainBottom from '../components/main/MainBottom';
@@ -20,3 +20,10 @@ const Home: NextPage = () => {
 };
 
 export default Home;
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  console.log(context.req.headers.cookie);
+  return {
+    props: {},
+  };
+};

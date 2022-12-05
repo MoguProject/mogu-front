@@ -12,23 +12,21 @@ import {
   ForgotUser,
 } from './styled';
 
-import { useMutation } from 'react-query';
+import { useMutation, useQueryClient } from 'react-query';
 import { AxiosError } from 'axios';
 import { loginApi } from '../../../utils/apis/user';
 import type { LoginSubmitData, UserLoginReturnData } from '../../../types';
 import { useRouter } from 'next/router';
-import { setToken } from 'utils/setToken';
 const Login = () => {
   const router = useRouter();
+  const queryClient = useQueryClient();
   const loginMutation = useMutation<
     UserLoginReturnData,
     AxiosError,
     LoginSubmitData
   >(loginApi, {
     onSuccess: (res) => {
-      const { token } = res;
-      setToken(token);
-      localStorage.setItem('access_token', token);
+      queryClient.invalidateQueries(['user']);
       router.push('/');
     },
     onError: (error) => {
