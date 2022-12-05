@@ -15,7 +15,7 @@ import {
 import type { SignupSubmitData } from '../../../types';
 import { useMutation } from 'react-query';
 import { AxiosError } from 'axios';
-import { emailCertificateApi, signupApi } from 'utils/user';
+import { emailCertificateApi, signupApi } from 'utils/apis/user';
 import AuthModal from '../AuthModal';
 import { useRecoilState, useResetRecoilState } from 'recoil';
 import { eamilCertState, authModalState, userCertValue } from 'recoil/atom';

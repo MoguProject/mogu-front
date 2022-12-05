@@ -10,10 +10,9 @@ import {
 } from './styled';
 import Link from 'next/link';
 import Image from 'next/image';
-import useIsLoggedIn from 'hooks/useIsLoggedIn';
 import styled from 'styled-components';
-import { useEffect, useState } from 'react';
-
+import { useQuery } from 'react-query';
+import { loadMyInfo } from 'utils/apis/user';
 const ProfileCardImage = styled.div`
   width: 32px;
   height: 32px;
@@ -25,19 +24,9 @@ const ProfileCardImage = styled.div`
 `;
 
 const Header = () => {
-  const isLoggedIn = useIsLoggedIn();
-  const [userNickname, setUserNickname] = useState('');
-  const [userProfileImageUrl, setUserProfileImageUrl] = useState('');
-
-  useEffect(() => {
-    if (isLoggedIn) {
-      const user = localStorage.getItem('user');
-      const { nickname, profileImageUrl } = JSON.parse(user || '{}');
-      console.log(nickname, profileImageUrl);
-      setUserNickname(nickname);
-      setUserProfileImageUrl(profileImageUrl);
-    }
-  }, [userNickname, userProfileImageUrl, isLoggedIn]);
+  const { data, isError } = useQuery(['user'], loadMyInfo, {
+    retry: 0,
+  });
 
   return (
     <HeaderWrapper>
@@ -58,16 +47,8 @@ const Header = () => {
           </HeaderNav>
         </HeaderLeft>
         <HeaderRight>
-          {isLoggedIn ? (
-            <ProfileCardImage>
-              <Image
-                src={userProfileImageUrl}
-                alt={'프로필사진'}
-                width={32}
-                height={32}
-              />
-            </ProfileCardImage>
-          ) : (
+          {data ? <div>로그아웃</div> : null}
+          {isError ? (
             <AuthNavWrapper>
               <li>
                 <Link href={'/auth/signup'}>회원가입</Link>
@@ -76,7 +57,7 @@ const Header = () => {
                 <Link href={'/auth/login'}>로그인</Link>
               </li>
             </AuthNavWrapper>
-          )}
+          ) : null}
         </HeaderRight>
       </HeaderStyled>
     </HeaderWrapper>
