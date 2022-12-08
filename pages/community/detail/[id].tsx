@@ -12,6 +12,10 @@ import {
 import CommunityHeaderTop from 'components/community/CommunityHeader/top';
 import CommunityPost from 'components/common/post/CommunityPost';
 import CommunityPostReview from 'components/community/CommunityReview';
+import { useRouter } from 'next/router';
+import { dehydrate, QueryClient, useQuery } from 'react-query';
+import axios from 'axios';
+import { GetServerSideProps, GetStaticProps } from 'next';
 
 const CommunityWrapper = styled.div`
   max-width: 960px;
@@ -23,8 +27,17 @@ type Inputs = {
 };
 
 const DetailCommunity = () => {
+  const router = useRouter();
+  const { id } = router.query;
+  const { data } = useQuery(['postDetailData', id], () => {
+    return axios
+      .get(`http://13.124.27.209:8080/posts/post/${id}`)
+      .then((response) => response.data);
+  });
+  console.log('data:', data);
   const { register, handleSubmit } = useForm<Inputs>();
   const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
+
   return (
     <Layout>
       <CommunityWrapper>
@@ -32,7 +45,7 @@ const DetailCommunity = () => {
           <CommunityHeaderTop />
         </CommunityHeaderWrapper>
         <CommunityPostWrapper>
-          <CommunityPost />
+          <CommunityPost data={data} />
         </CommunityPostWrapper>
         <CommunityBtnWrapper>
           <CommnityPostEditDeleteButton>수정하기</CommnityPostEditDeleteButton>
@@ -55,3 +68,21 @@ const DetailCommunity = () => {
 };
 
 export default DetailCommunity;
+
+export const getServerSideProps: GetServerSideProps = async ({
+  query: { id },
+}) => {
+  const queryClient = new QueryClient();
+  console.log('id:', id);
+  await queryClient.prefetchQuery(['postDetailData', id], () => {
+    return axios
+      .get(`http://13.124.27.209:8080/posts/post/${id}`)
+      .then((response) => response.data);
+  });
+  console.log('queryClient:', queryClient);
+  return {
+    props: {
+      dehydratedState: JSON.parse(JSON.stringify(dehydrate(queryClient))),
+    },
+  };
+};

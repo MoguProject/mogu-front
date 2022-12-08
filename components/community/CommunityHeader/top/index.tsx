@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import {
   CommunityHeaderTitle,
   CommunityHeaderTopWrapper,
@@ -8,7 +9,9 @@ const CommunityHeaderTop = () => {
   return (
     <CommunityHeaderTopWrapper>
       <CommunityHeaderTitle>커뮤니티 🕹</CommunityHeaderTitle>
-      <CommunityHeaderWrite>글쓰기</CommunityHeaderWrite>
+      <CommunityHeaderWrite>
+        <Link href="/registration/community">글쓰기</Link>
+      </CommunityHeaderWrite>
     </CommunityHeaderTopWrapper>
   );
 };
