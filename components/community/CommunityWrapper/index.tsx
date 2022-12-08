@@ -1,8 +1,9 @@
 import React from 'react';
+import { useQuery } from 'react-query';
 import styled from 'styled-components';
+import { getPostDataApi } from 'utils/apis/posts';
 import CommunityPost from '../../common/post/CommunityPost';
 import CommunityHeader from '../CommunityHeader';
-import Link from 'next/link';
 
 export const CommunityWrapperWrapper = styled.div`
   max-width: 960px;
@@ -11,22 +12,14 @@ export const CommunityWrapperWrapper = styled.div`
 `;
 
 const CommunityWrapper = () => {
+  const { data } = useQuery('communityPostData', () => getPostDataApi(1));
+  console.log('data:', data);
   return (
     <CommunityWrapperWrapper>
       <CommunityHeader />
-      <Link href={'/community/detail/1'}>
-        {' '}
-        <CommunityPost />
-      </Link>
-      <CommunityPost />
-      <CommunityPost />
-      <CommunityPost />
-      <CommunityPost />
-      <CommunityPost />
-      <CommunityPost />
-      <CommunityPost />
-      <CommunityPost />
-      <CommunityPost />
+      {data.content.map((item) => (
+        <CommunityPost key={item.id} data={item} />
+      ))}
     </CommunityWrapperWrapper>
   );
 };

@@ -1,4 +1,6 @@
 import Image from 'next/image';
+import Link from 'next/link';
+import { useQuery } from 'react-query';
 
 import {
   CommunityPostFooter,
@@ -12,22 +14,15 @@ import {
   CommunityPostWrapper,
 } from './styled';
 
-const CommunityPost = () => {
+const CommunityPost = ({ data }) => {
   return (
     <CommunityPostWrapper>
       <CommunityPostLeft>
-        <CommunityPostHeader>팀 프로젝트</CommunityPostHeader>
+        <CommunityPostHeader>{data.categoryName}</CommunityPostHeader>
         <CommunityPostTitle>
-          프로젝트 / 스터디 모집하는 프로젝트, 모구
+          <Link href={`/community/detail/${data.id}`}>{data.title}</Link>
         </CommunityPostTitle>
-        <CommunityPostSummary>
-          Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry. Lorem Ipsum has been the industry's standard dummy text ever
-          since the 1500s, when an unknownindustry. Lorem Ipsum has been the
-          industry's standard dummy text ever since the 1500s, when an
-          unknownindustry. Lorem Ipsum has been the industry's standard dummy
-          text ever since the 1500s, when an unknown
-        </CommunityPostSummary>
+        <CommunityPostSummary>{data.content}</CommunityPostSummary>
         <CommunityPostFooter>
           <CommunityPostIconWrapper>
             <CommunityPostIcon
@@ -36,7 +31,7 @@ const CommunityPost = () => {
               width={15}
               height={14}
             />
-            20
+            {data.likeCount}
           </CommunityPostIconWrapper>
           <CommunityPostIconWrapper>
             <CommunityPostIcon
@@ -45,7 +40,7 @@ const CommunityPost = () => {
               width={16}
               height={14}
             />
-            132
+            {data.view}
           </CommunityPostIconWrapper>
         </CommunityPostFooter>
       </CommunityPostLeft>
