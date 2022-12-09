@@ -5,6 +5,7 @@ export const CommunityPostWrapper = styled.div`
   width: 100%;
   height: 180px;
   display: flex;
+  justify-content: space-between;
   position: relative;
   border-bottom: 2px solid ${(props) => props.theme.colors.border};
 `;

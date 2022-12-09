@@ -21,6 +21,7 @@
     "react-dom": "18.2.0",
     "react-hook-form": "^7.39.5",
     "react-query": "^3.39.2",
+    "react-quill": "^2.0.0",
     "react-responsive": "^9.0.0",
     "recoil": "^0.7.6",
     "recoil-persist": "^4.2.0",
