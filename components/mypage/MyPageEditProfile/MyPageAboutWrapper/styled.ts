@@ -1,7 +1,12 @@
 import styled from 'styled-components';
 
-export const MyPageAboutEditWrapper = styled.form`
+export const MyPageAboutEditWrapper = styled.div`
   width: 90%;
+`;
+
+export const MyPageAboutEditTitle = styled.h3`
+  font-weight: 500;
+  color: ${(props) => props.theme.colors.primary};
 `;
 
 export const MyPageAboutEditInput = styled.textarea<{ active: boolean }>`

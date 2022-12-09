@@ -27,7 +27,7 @@ const CommunityHeader = () => {
           </CommunityHeaderSelectContent>
         </CommunityHeaderSelect>
         <CommunityHeaderSearch>
-          <SelectInput>
+          <SelectInput width={'107px'}>
             <select name="" id="">
               <option value="">제목</option>
               <option value="">내용</option>

@@ -1,16 +1,13 @@
+import axios from 'axios';
 import { axiosInstance } from 'axiosInstance';
 import { LoginSubmitData, SignupSubmitData } from 'types';
 
 export const loginApi = ({ email, password }: LoginSubmitData) => {
   return axiosInstance
-    .post(
-      '/user/login',
-      {
-        email,
-        password,
-      },
-      {},
-    )
+    .post('/user/login', {
+      email,
+      password,
+    })
     .then((response) => response.data);
 };
 
@@ -50,6 +47,36 @@ export const getMyPageUserDataApi = () => {
   return axiosInstance.get('/user/mypage').then((response) => response.data);
 };
 
-export const editProfileApi = ({ data, token }) => {
-  return axiosInstance.put('/user/update', {}).then((res) => res.data);
+export const updateMyPageUserDataAp = (data) => {
+  return axios
+    .put('/user/update', data, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    })
+    .then((res) => res.data);
+};
+
+export const getMyPageProjectPostsApi = () => {
+  return axiosInstance
+    .get('/user/mypage/post/project')
+    .then((response) => response.data);
+};
+
+export const getMyPageStudyPostsApi = () => {
+  return axiosInstance
+    .get('/user/mypage/post/study')
+    .then((response) => response.data);
+};
+
+export const getMyPageRepliedApi = () => {
+  return axiosInstance
+    .get('/user/mypage/post/replied')
+    .then((response) => response.data);
+};
+
+export const getMyPageLikedApi = () => {
+  return axiosInstance
+    .get('/user/mypage/post/liked')
+    .then((response) => response.data);
 };
