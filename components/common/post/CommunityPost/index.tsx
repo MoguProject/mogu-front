@@ -1,3 +1,4 @@
+import { CommunityPostType } from 'components/community/CommunityWrapper';
 import Image from 'next/image';
 import Link from 'next/link';
 import {
@@ -11,15 +12,6 @@ import {
   CommunityPostTitle,
   CommunityPostWrapper,
 } from './styled';
-
-interface CommunityPostType {
-  content: string;
-  categoryName: number;
-  id: number;
-  title: string;
-  likeCount: number;
-  view: number;
-}
 
 const CommunityPost = (data: CommunityPostType) => {
   const contents = data.content;
