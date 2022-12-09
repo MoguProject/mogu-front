@@ -2,15 +2,14 @@ import styled from 'styled-components';
 import Prev from 'public/images/icon/chevron_prev.svg';
 import Next from 'public/images/icon/chevron_next.svg';
 
-export const PrevIcon = styled(Prev)`
-  width: 11px;
-
+export const PrevIcon = styled('div')`
+  /* width: 11px;
   path {
     fill: ${(props) => props.theme.colors.primary};
-  }
+  } */
 `;
 
-export const NextIcon = styled(Next)`
+export const NextIcon = styled('div')`
   width: 11px;
 
   path {

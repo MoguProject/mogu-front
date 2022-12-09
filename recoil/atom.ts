@@ -17,3 +17,8 @@ export const userCertValue = atom<string>({
   key: 'userCertificateValue',
   default: '',
 });
+
+export const onEditProfileState = atom<boolean>({
+  key: 'onEditProfileState',
+  default: false,
+});

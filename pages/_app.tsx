@@ -1,5 +1,5 @@
 import type { AppProps } from 'next/app';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { Hydrate, QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import { ThemeProvider } from 'styled-components';
@@ -9,12 +9,9 @@ import { theme } from '../styles/theme';
 import Head from 'next/head';
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const queryClientRef = useRef<QueryClient>();
-  if (!queryClientRef.current) {
-    queryClientRef.current = new QueryClient();
-  }
+  const [queryClient] = useState(() => new QueryClient());
   return (
-    <QueryClientProvider client={queryClientRef.current}>
+    <QueryClientProvider client={queryClient}>
       <Hydrate state={pageProps.dehydratedState}>
         <ThemeProvider theme={theme}>
           <RecoilRoot>

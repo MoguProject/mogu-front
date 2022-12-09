@@ -168,7 +168,7 @@ const Registration = () => {
         </FirstSection>
         <section>
           <p>2.프로젝트에 대해 소개해주세요.</p>
-          <PostEditor value={content} onChange={setContent} />
+          {/* <PostEditor value={content} onChange={setContent} /> */}
         </section>
         <RegistrationButton>등록하기</RegistrationButton>
       </RegistrationForm>

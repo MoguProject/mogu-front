@@ -24,10 +24,10 @@ const ProfileCardImage = styled.div`
 `;
 
 const Header = () => {
-  const { data, isError } = useQuery(['user'], loadMyInfo, {
-    retry: 0,
+  const { data } = useQuery(['user'], loadMyInfo, {
+    retry: false,
+    refetchOnWindowFocus: false,
   });
-
   return (
     <HeaderWrapper>
       <HeaderStyled>
@@ -47,8 +47,9 @@ const Header = () => {
           </HeaderNav>
         </HeaderLeft>
         <HeaderRight>
-          {data ? <div>로그아웃</div> : null}
-          {isError ? (
+          {data ? (
+            <div>로그아웃</div>
+          ) : (
             <AuthNavWrapper>
               <li>
                 <Link href={'/auth/signup'}>회원가입</Link>
@@ -57,7 +58,7 @@ const Header = () => {
                 <Link href={'/auth/login'}>로그인</Link>
               </li>
             </AuthNavWrapper>
-          ) : null}
+          )}
         </HeaderRight>
       </HeaderStyled>
     </HeaderWrapper>

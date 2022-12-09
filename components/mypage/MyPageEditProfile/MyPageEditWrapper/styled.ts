@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const MyPageEditWrapperStyled = styled.form`
+export const MyPageEditWrapperStyled = styled.div`
   width: 90%;
   display: flex;
   flex-direction: column;
@@ -22,7 +22,7 @@ export const MyPageEditInputWrapper = styled.div`
 export const MyPageEditInput = styled.input<{ active: boolean }>`
   outline: none;
   border: 1px solid ${(props) => props.theme.colors.border};
-  padding: 8px;
+  padding: 8px 16px;
   color: ${(props) =>
     props.active ? props.theme.colors.primary : props.theme.colors.secondary};
   background-color: ${(props) =>

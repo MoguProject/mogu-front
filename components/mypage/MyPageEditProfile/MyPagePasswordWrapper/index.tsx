@@ -1,4 +1,7 @@
 import { useCallback, useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { useRecoilState } from 'recoil';
+import { onEditProfileState } from 'recoil/atom';
 import styled from 'styled-components';
 
 import {
@@ -10,6 +13,7 @@ import {
 
 const MyPagePasswordForm = styled.div`
   width: 90%;
+  margin-top: 8px;
 `;
 
 const MyPagePasswordEditWrapper = styled(MyPageEditWrapperStyled)`
@@ -18,7 +22,7 @@ const MyPagePasswordEditWrapper = styled(MyPageEditWrapperStyled)`
 
 const MyPagePasswordDefalt = styled.div`
   border: 1px solid ${(props) => props.theme.colors.border};
-  padding: 10px;
+  padding: 10px 16px;
   flex: 1;
   color: ${(props) => props.theme.colors.secondary};
   background-color: ${(props) => props.theme.colors.border};
@@ -27,11 +31,12 @@ const MyPagePasswordDefalt = styled.div`
 
 const MyPagePasswordInput = styled.input`
   border: 1px solid ${(props) => props.theme.colors.border};
-  padding: 10px;
+  padding: 10px 16px;
   flex: 1;
   color: ${(props) => props.theme.colors.primary};
   background-color: ${(props) => props.theme.colors.white};
   margin-bottom: 12px;
+  border-radius: 4px;
 `;
 
 const ErrorMessage = styled.p`
@@ -63,6 +68,7 @@ const MyPagePasswordEditButton = styled.button<{ cancle?: boolean }>`
 
 const MyPagePasswordWrapper = () => {
   const [editActive, setEditActive] = useState(false);
+  const [onEdit, setOnEdit] = useRecoilState(onEditProfileState);
 
   const onClickEditButton = useCallback(() => {
     setEditActive(true);
@@ -72,27 +78,35 @@ const MyPagePasswordWrapper = () => {
     setEditActive(false);
   }, [editActive]);
 
+  const { register, handleSubmit } = useForm();
+
   return (
     <MyPagePasswordForm>
       <MyPagePasswordEditWrapper>
         <MyPageEditLabel>비밀번호 변경</MyPageEditLabel>
         <MyPageEditInputWrapper>
           <MyPagePasswordDefalt>********</MyPagePasswordDefalt>
-          {editActive ? null : (
+          {!editActive && (
             <MyPageEditButton active={false} onClick={onClickEditButton}>
               변경하기
             </MyPageEditButton>
           )}
         </MyPageEditInputWrapper>
-        {editActive ? (
+        {editActive && (
           <>
             <MyPagePasswordInput
               placeholder="현재 사용중인 비밀번호를 입력해 주세요."
               type={'password'}
+              {...register('currentPassword', {
+                required: true,
+              })}
             />
             <MyPagePasswordInput
               placeholder="변경할 비밀번호를 입력해 주세요"
               type={'password'}
+              {...register('newPassword', {
+                required: true,
+              })}
             />
             {/* <ErrorMessage>
             8자 이상, 영문/숫자/특수문자 중 2가지 이상 입력해주세요
@@ -107,7 +121,7 @@ const MyPagePasswordWrapper = () => {
               <MyPagePasswordEditButton>저장하기</MyPagePasswordEditButton>
             </MyPagePasswordEditButtonWrapper>
           </>
-        ) : null}
+        )}
       </MyPagePasswordEditWrapper>
     </MyPagePasswordForm>
   );

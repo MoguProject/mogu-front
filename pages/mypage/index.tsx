@@ -14,6 +14,8 @@ import { axiosInstance } from 'axiosInstance';
 import { useEffect, useState, useCallback } from 'react';
 import styled from 'styled-components';
 import { getMyPageUserDataApi } from 'utils/apis/user';
+import { dehydrate, QueryClient } from 'react-query';
+import { useQuery } from 'react-query';
 
 export interface MyPageData {
   profileImageUrl: string;
@@ -88,10 +90,8 @@ const ProfileImageEditButton = styled.button`
   }
 `;
 
-const MyPage = ({
-  data,
-}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-  console.log(data);
+const MyPage = () => {
+  const { data } = useQuery(['mypageData'], getMyPageUserDataApi);
   const [activeEditProfile, setActiveEditProfile] = useState(true);
   const [activeProjectStudy, setActiveProjectStudy] = useState(false);
   const [activeLiked, setActiveLiked] = useState(false);
@@ -130,11 +130,11 @@ const MyPage = ({
         <MyPageTopSection>
           <ProfileImageWrapper>
             {/* <Image
-              src={data.profileImageUrl}
-              alt={'프로필사진'}
-              width={100}
-              height={100}
-            /> */}
+                src={data.profileImageUrl}
+                alt={'프로필사진'}
+                width={100}
+                height={100}
+              /> */}
           </ProfileImageWrapper>
           <ProfileNickname>{data.nickname}</ProfileNickname>
           <ProfileImageEditButton>프로필 이미지 수정</ProfileImageEditButton>
@@ -143,7 +143,7 @@ const MyPage = ({
               active={activeEditProfile}
               onClick={onClickEditProfile}
             >
-              정보 수정
+              내 정보
             </MyPageNavItem>
             <MyPageNavItem
               active={activeProjectStudy}
@@ -170,20 +170,20 @@ const MyPage = ({
 
 export default MyPage;
 
-export const getServerSideProps: GetServerSideProps<{
-  data: MyPageData;
-}> = async (context) => {
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const queryClient = new QueryClient();
   const cookie = context.req ? context.req.headers.cookie : '';
   axios.defaults.headers.Cookie = '';
   if (context.req && cookie) {
     axios.defaults.headers.Cookie = cookie;
-    const res = await axiosInstance
-      .get('http://13.124.27.209:8080/user/mypage')
-      .then((response) => response.data);
-    console.log(res);
+    await queryClient.prefetchQuery(['mypageData'], () => {
+      return axios
+        .get('http://13.124.27.209:8080/user/mypage')
+        .then((response) => response.data);
+    });
     return {
       props: {
-        data: res,
+        dehydratedState: JSON.parse(JSON.stringify(dehydrate(queryClient))),
       },
     };
   }
