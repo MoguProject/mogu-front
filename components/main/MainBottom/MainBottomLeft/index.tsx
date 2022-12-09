@@ -1,3 +1,4 @@
+import { CommunityPostType } from 'components/community/CommunityWrapper';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { getPostDataApi } from 'utils/apis/posts';
@@ -47,7 +48,7 @@ const MainBottomLeft = () => {
           <Link href="/community/category/1">더보기</Link>
         </MainBottomLeftMoreButtom>
       </MainBottomLeftHeader>
-      {newPost.map((item) => (
+      {newPost.map((item: CommunityPostType) => (
         <CommunityPost key={item.id} data={item} />
       ))}
     </MainBottomLeftWrapper>
