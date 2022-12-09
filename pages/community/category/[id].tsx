@@ -2,7 +2,10 @@ import { useRouter } from 'next/router';
 import { GetStaticProps } from 'next';
 import { dehydrate, QueryClient, useQuery } from 'react-query';
 import axios from 'axios';
-import { CommunityWrapperWrapper } from 'components/community/CommunityWrapper';
+import {
+  CommunityPostType,
+  CommunityWrapperWrapper,
+} from 'components/community/CommunityWrapper';
 import CommunityHeader from 'components/community/CommunityHeader';
 
 import CommunityPost from 'components/common/post/CommunityPost';
@@ -21,7 +24,7 @@ const catgoryPosts = () => {
     <Layout>
       <CommunityWrapperWrapper>
         <CommunityHeader />
-        {data.content.map((item) => (
+        {data.content.map((item: CommunityPostType) => (
           <CommunityPost key={item.id} data={item} />
         ))}
       </CommunityWrapperWrapper>
