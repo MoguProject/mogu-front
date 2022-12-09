@@ -13,7 +13,7 @@ import {
   CommunityPostWrapper,
 } from './styled';
 
-const CommunityPost = (data: CommunityPostType) => {
+const CommunityPost = ({ data }: { data: CommunityPostType }) => {
   const contents = data.content;
   return (
     <CommunityPostWrapper>
