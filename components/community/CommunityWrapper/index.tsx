@@ -10,14 +10,21 @@ export const CommunityWrapperWrapper = styled.div`
   padding: 36px 10px;
   margin: 0 auto;
 `;
+export interface CommunityPostType {
+  content: string;
+  categoryName: number;
+  id: number;
+  title: string;
+  likeCount: number;
+  view: number;
+}
 
 const CommunityWrapper = () => {
   const { data } = useQuery('communityPostData', () => getPostDataApi(1));
-  console.log('data:', data);
   return (
     <CommunityWrapperWrapper>
       <CommunityHeader />
-      {data.content.map((item) => (
+      {data.content.map((item: CommunityPostType) => (
         <CommunityPost key={item.id} data={item} />
       ))}
     </CommunityWrapperWrapper>
