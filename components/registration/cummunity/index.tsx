@@ -3,8 +3,8 @@ import 'react-quill/dist/quill.snow.css';
 import { RegistrationButton } from '../styled';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import axios from 'axios';
-import { Container, ErrorMessage, PostRegistrationForm } from './styled';
 import Editor from '../Editor';
+import { Container, ErrMessage, PostRegistrationForm } from './styled';
 
 export type FormValues = {
   categoryId: string;
@@ -63,7 +63,7 @@ const CommunityPostRegistration = () => {
           placeholder="제목을 작성해주세요."
           {...register('title', { required: true })}
         />
-        {errors.title && <ErrorMessage>제목을 작성해주세요.</ErrorMessage>}
+        {errors.title && <ErrMessage>제목을 작성해주세요.</ErrMessage>}
         <Editor
           onChange={onChangeContents}
           value={content}
