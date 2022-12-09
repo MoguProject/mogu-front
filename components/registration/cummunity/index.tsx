@@ -3,8 +3,16 @@ import 'react-quill/dist/quill.snow.css';
 import { RegistrationButton } from '../styled';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import axios from 'axios';
-import Editor from '../Editor';
+
 import { Container, ErrMessage, PostRegistrationForm } from './styled';
+import 'react-quill/dist/quill.snow.css';
+import dynamic from 'next/dynamic';
+
+// react-quill 컴포넌트 분리 전 코드
+const ReactQuillWrapper = dynamic(() => import('react-quill'), {
+  ssr: false,
+  loading: () => <p>Loading...</p>,
+});
 
 export type FormValues = {
   categoryId: string;
@@ -64,12 +72,10 @@ const CommunityPostRegistration = () => {
           {...register('title', { required: true })}
         />
         {errors.title && <ErrMessage>제목을 작성해주세요.</ErrMessage>}
-        <Editor
+        <ReactQuillWrapper
           onChange={onChangeContents}
           value={content}
           theme="snow"
-          placeholder="내용을 입력해주세요."
-          s
         />
         <RegistrationButton>등록하기</RegistrationButton>
       </PostRegistrationForm>

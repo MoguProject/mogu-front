@@ -33,7 +33,7 @@ export const CommunityPostTitle = styled.h2`
   color: ${(props) => props.theme.colors.primary};
 `;
 
-export const CommunityPostSummary = styled.p`
+export const CommunityPostSummary = styled.div`
   font-size: 14px;
   letter-spacing: 0.25px;
   padding: 10px 10px 0 10px;
