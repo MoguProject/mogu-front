@@ -3,8 +3,16 @@ import styled from 'styled-components';
 export const ProjectDesktopCardWrapper = styled.div`
   width: 240px;
   height: 330px;
-  padding: 10px;
   position: relative;
+  border-radius: 8px;
+  cursor: pointer;
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+
+  :hover {
+    transform: translateY(-4px);
+    transition: all 0.3s ease-in-out;
+  }
 `;
 
 export const TagsWrapper = styled.div`
@@ -12,6 +20,7 @@ export const TagsWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
+  padding: 0 10px;
   align-items: center;
 
   div {
@@ -25,6 +34,7 @@ export const ProjectDesktopCardTitle = styled.h2`
   letter-spacing: 0.25px;
   line-height: 1.25;
   margin-top: 8px;
+  padding: 0 10px;
   color: ${(props) => props.theme.colors.primary};
 `;
 
@@ -39,6 +49,7 @@ export const ProjectDesktopCardFooter = styled.div`
   width: 100%;
   bottom: 0;
   left: 0;
+  border-top: 1px solid ${(props) => props.theme.colors.border};
 `;
 export const TotalUser = styled.div`
   font-size: 12px;

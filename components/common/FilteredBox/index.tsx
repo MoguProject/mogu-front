@@ -1,21 +1,48 @@
-import React from 'react';
+import React, { ChangeEvent, Dispatch, SetStateAction } from 'react';
+import SelectInput from '../input/SelectInput';
 import { ProjectsFilter } from './styled';
 
-const FilteredBox = () => {
+interface FilterBoxPropsInterface {
+  currentSort: 'recent' | 'liked' | 'opened';
+  setCurrentSort: Dispatch<SetStateAction<'recent' | 'liked' | 'opened'>>;
+}
+
+const FilteredBox = ({
+  currentSort,
+  setCurrentSort,
+}: FilterBoxPropsInterface) => {
+  const onChangeSelectSort = (e: ChangeEvent<HTMLSelectElement>) => {
+    const value = e.target.value;
+    if (value === 'recent') {
+      setCurrentSort('recent');
+      return;
+    }
+    setCurrentSort('liked');
+  };
+
+  const onChangeOpened = (e: ChangeEvent<HTMLInputElement>) => {
+    const checked = e.target.checked;
+    if (checked) {
+      return setCurrentSort('opened');
+    } else {
+      return setCurrentSort('recent');
+    }
+  };
   return (
     <ProjectsFilter>
-      <select>
-        <option value="온라인">온라인</option>
-        <option value="오프라인">오프라인</option>
-      </select>
-      <select>
-        <option value="기술스택">기술스택</option>
-      </select>
-      <select>
-        <option value="최신순">최신순</option>
-        <option value="인기순">인기순</option>
-      </select>
-      <input id="projectState" type="checkbox" name="state" value="모집중" />{' '}
+      <SelectInput width="200px">
+        <select onChange={onChangeSelectSort}>
+          <option value="recent">최신순</option>
+          <option value="liked">인기순</option>
+        </select>
+      </SelectInput>
+      <input
+        onChange={onChangeOpened}
+        id="projectState"
+        type="checkbox"
+        name="state"
+        value="opened"
+      />
       <label htmlFor="projectState">모집중</label>
     </ProjectsFilter>
   );

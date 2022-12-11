@@ -19,20 +19,20 @@ export const HeaderStyled = styled.div`
 
 export const HeaderNavList = styled.ul`
   display: flex;
+`;
 
-  li {
-    padding: 0 24px;
-    font-size: 16px;
-    font-weight: 700;
-    color: ${(props) => props.theme.colors.primary};
-    cursor: pointer;
-
-    :hover {
-      color: ${(props) => props.theme.colors.red};
-    }
-  }
-  li.active {
-    color: ${(props) => props.theme.colors.red};
+export const HeaderNavItem = styled.span<{ active: boolean }>`
+  padding: 16px 24px;
+  font-size: 14px;
+  font-weight: 500;
+  color: ${(props) =>
+    props.active ? props.theme.colors.green : props.theme.colors.primary};
+  cursor: pointer;
+  border-bottom: ${(props) =>
+    props.active ? `2px solid ${props.theme.colors.green}` : null};
+  transition: all 0.2s ease-in;
+  :hover {
+    color: ${(props) => props.theme.colors.green};
   }
 `;
 

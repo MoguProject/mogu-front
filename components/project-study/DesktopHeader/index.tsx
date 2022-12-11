@@ -3,23 +3,42 @@ import {
   HeaderStyled,
   HeaderNavList,
   RecruitButtonWrapper,
+  HeaderNavItem,
 } from './styled';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
+import { Dispatch, SetStateAction } from 'react';
+const ProjectStudyDesktopHeader = ({
+  currentCategory,
+  setCurrentCategory,
+}: {
+  currentCategory: number;
+  setCurrentCategory: Dispatch<SetStateAction<number>>;
+}) => {
+  const onClickCategoryProjects = () => {
+    console.log('change!');
+    setCurrentCategory(4);
+  };
 
-const ProjectStudyDesktopHeader = () => {
-  const router = useRouter();
+  const onClickCategoryStudys = () => {
+    setCurrentCategory(5);
+  };
   return (
     <HeaderWrapper>
       <HeaderStyled>
         <nav>
           <HeaderNavList>
-            <li className={router.pathname === '/projects' ? 'active' : ''}>
-              <Link href="/projects">프로젝트</Link>
-            </li>
-            <li className={router.pathname === '/study' ? 'active' : ''}>
-              <Link href="/study">스터디</Link>
-            </li>
+            <HeaderNavItem
+              onClick={onClickCategoryProjects}
+              active={currentCategory === 4}
+            >
+              <span>프로젝트</span>
+            </HeaderNavItem>
+            <HeaderNavItem
+              onClick={onClickCategoryStudys}
+              active={currentCategory === 5}
+            >
+              <span>스터디</span>
+            </HeaderNavItem>
           </HeaderNavList>
         </nav>
         <RecruitButtonWrapper>
