@@ -12,28 +12,43 @@ import {
   ProjectDesktopCardLikeText,
   ProjectDesktopCardLike,
 } from './styled';
-import type { ProjectDummyData } from '../../../../../dummy/ProjectsData';
+import { ProjectStudyContentInterface } from 'types';
 
-const ProjectDesktopCard = ({ data }: { data: ProjectDummyData }) => {
+const ProjectDesktopImageWrapper = styled.div`
+  width: 100%;
+  height: 152px;
+  position: relative;
+
+  img {
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+  }
+`;
+
+const ProjectDesktopCard = ({
+  data,
+}: {
+  data: ProjectStudyContentInterface;
+}) => {
   return (
     <ProjectDesktopCardWrapper>
-      <Image
-        src={data.imgUrl}
-        alt={'프로젝트 카드 이미지'}
-        width={220}
-        height={152}
-      />
+      <ProjectDesktopImageWrapper>
+        <Image
+          src={data.mainImage}
+          alt={'프로젝트 카드 이미지'}
+          layout="fill"
+          objectFit="fill"
+        />
+      </ProjectDesktopImageWrapper>
       <TagsWrapper>
-        {data.categories.map((category) => (
-          <CardTags tag={category} key={category} />
+        {data.postSkills.map((category) => (
+          <CardTags tag={category.skillName} key={category.id} />
         ))}
-        <CardState state={data.state} />
+        <CardState state={data.openStatus} />
       </TagsWrapper>
       <ProjectDesktopCardTitle>{data.title}</ProjectDesktopCardTitle>
       <ProjectDesktopCardFooter>
-        <TotalUser>
-          모집인원 {data.currentUser} / {data.totalUser}
-        </TotalUser>
+        <TotalUser>모집인원 {data.memberCount}</TotalUser>
         <ProjectDesktopCardLike>
           <Image
             src={'/images/icon/heart_active.svg'}
@@ -41,7 +56,9 @@ const ProjectDesktopCard = ({ data }: { data: ProjectDummyData }) => {
             width={15}
             height={13.76}
           />
-          <ProjectDesktopCardLikeText>{data.like}</ProjectDesktopCardLikeText>
+          <ProjectDesktopCardLikeText>
+            {data.likeCount}
+          </ProjectDesktopCardLikeText>
         </ProjectDesktopCardLike>
       </ProjectDesktopCardFooter>
     </ProjectDesktopCardWrapper>

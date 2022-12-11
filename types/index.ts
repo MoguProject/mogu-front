@@ -28,3 +28,55 @@ export interface MyPageEditSubmitData {
   region: string;
   skills: string[];
 }
+
+export interface ProjectStudyContentInterface {
+  categoryId: number;
+  categoryName: string;
+  contactInfo: string;
+  contactMethod: string;
+  content: string;
+  createdAt: string;
+  likeCount: number;
+  likeStatus: boolean;
+  mainImage: string;
+  memberCount: number;
+  openStatus: boolean;
+  period: string;
+  postId: number;
+  postSkills: { id: number; skillName: string }[];
+  preferredMethod: string;
+  region: string;
+  startAt: string;
+  title: string;
+  updatedAt: string;
+  userId: number;
+  userNickname: string;
+  view: number;
+}
+
+export interface SortInterface {
+  empty: boolean;
+  sorted: boolean;
+  unsorted: boolean;
+}
+
+export interface ProjectStudyDataInterface {
+  content: ProjectStudyContentInterface[];
+  empty: boolean;
+  first: boolean;
+  last: boolean;
+  number: number;
+  numberOfElements: number;
+  pageable: {
+    sort: SortInterface;
+    pageNumber: number;
+    pageSize: number;
+    offset: number;
+    paged: boolean;
+    unpaged: boolean;
+  };
+  size: number;
+  sort: SortInterface;
+  totalElements: number;
+  totalPages: number;
+}

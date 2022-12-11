@@ -80,3 +80,7 @@ export const getMyPageLikedApi = () => {
     .get('/user/mypage/post/liked')
     .then((response) => response.data);
 };
+
+export const myPageChangePasswordApi = (data) => {
+  return axiosInstance.put('/user/update/password', data);
+};

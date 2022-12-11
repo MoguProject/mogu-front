@@ -4,6 +4,8 @@ import ProjectDesktopCard from '../../common/card/project/ProjectDesktopCard';
 import StudyCard from '../../common/card/study/StudyCard';
 import { ProjectDummyData } from '../../../dummy/ProjectsData';
 import { StudyDummyData } from '../../../dummy/StudyData';
+import { useIsDesktop } from 'hooks/useIsMobile';
+import ProjectMobileCard from 'components/common/card/project/ProjectMobileCard';
 
 const MainNewContentWrapper = styled.div`
   max-width: 1140px;
@@ -19,7 +21,15 @@ const MainNewContentTitle = styled.h1`
   padding: 10px;
 `;
 
+const MainNewContentTabletWrapper = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: center;
+`;
+
 const MainNewContent = ({ category }: { category: string }) => {
+  const isDesktop = useIsDesktop();
   const ProjectDummyData: ProjectDummyData = {
     id: 0,
     title: 'React + Spring 스터디 / 프로젝트 모집 사이트 같이 만드실분',
@@ -44,16 +54,27 @@ const MainNewContent = ({ category }: { category: string }) => {
       {category === 'project' ? (
         <>
           <MainNewContentTitle>새롭게 모집하는 프로젝트</MainNewContentTitle>
-          <CardCarousel>
-            <ProjectDesktopCard data={ProjectDummyData} />
-            <ProjectDesktopCard data={ProjectDummyData} />
-            <ProjectDesktopCard data={ProjectDummyData} />
-            <ProjectDesktopCard data={ProjectDummyData} />
-            <ProjectDesktopCard data={ProjectDummyData} />
-            <ProjectDesktopCard data={ProjectDummyData} />
-            <ProjectDesktopCard data={ProjectDummyData} />
-            <ProjectDesktopCard data={ProjectDummyData} />
-          </CardCarousel>
+          {/* {isDesktop ? (
+            <CardCarousel>
+              <ProjectDesktopCard data={ProjectDummyData} />
+              <ProjectDesktopCard data={ProjectDummyData} />
+              <ProjectDesktopCard data={ProjectDummyData} />
+              <ProjectDesktopCard data={ProjectDummyData} />
+              <ProjectDesktopCard data={ProjectDummyData} />
+              <ProjectDesktopCard data={ProjectDummyData} />
+              <ProjectDesktopCard data={ProjectDummyData} />
+              <ProjectDesktopCard data={ProjectDummyData} />
+            </CardCarousel>
+          ) : (
+            <MainNewContentTabletWrapper>
+              <ProjectDesktopCard data={ProjectDummyData} />
+              <ProjectDesktopCard data={ProjectDummyData} />
+              <ProjectDesktopCard data={ProjectDummyData} />
+              <ProjectDesktopCard data={ProjectDummyData} />
+              <ProjectDesktopCard data={ProjectDummyData} />
+              <ProjectDesktopCard data={ProjectDummyData} />
+            </MainNewContentTabletWrapper>
+          )} */}
         </>
       ) : (
         <>

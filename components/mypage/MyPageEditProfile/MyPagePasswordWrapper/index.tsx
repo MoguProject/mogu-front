@@ -1,8 +1,10 @@
-import { useCallback, useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { ChangeEvent, useCallback, useState } from 'react';
+import { ChangeHandler, useForm } from 'react-hook-form';
+import { QueryClient, useMutation, useQueryClient } from 'react-query';
 import { useRecoilState } from 'recoil';
 import { onEditProfileState } from 'recoil/atom';
 import styled from 'styled-components';
+import { myPageChangePasswordApi } from 'utils/apis/user';
 
 import {
   MyPageEditButton,
@@ -67,18 +69,43 @@ const MyPagePasswordEditButton = styled.button<{ cancle?: boolean }>`
 `;
 
 const MyPagePasswordWrapper = () => {
+  const queryClient = useQueryClient();
   const [editActive, setEditActive] = useState(false);
+  const [currentPassword, setCurrentPassword] = useState('');
+  const [newPassword, setNewPassword] = useState('');
   const [onEdit, setOnEdit] = useRecoilState(onEditProfileState);
+  const updatePasswordMutation = useMutation(myPageChangePasswordApi, {
+    onSuccess: (data) => {
+      console.log(data);
+      queryClient.invalidateQueries(['mypageData']);
+    },
+    onError: (error) => {
+      console.log(error.response.data);
+      alert(error.response.data);
+    },
+  });
 
   const onClickEditButton = useCallback(() => {
     setEditActive(true);
   }, [editActive]);
 
   const onClickCancelButton = useCallback(() => {
+    setCurrentPassword('');
+    setNewPassword('');
     setEditActive(false);
   }, [editActive]);
 
-  const { register, handleSubmit } = useForm();
+  const onChangeCurrentPassword = (e: ChangeEvent<HTMLInputElement>) => {
+    setCurrentPassword(e.target.value);
+  };
+
+  const onChangeNewPassword = (e: ChangeEvent<HTMLInputElement>) => {
+    setNewPassword(e.target.value);
+  };
+
+  const onClickEditPassword = () => {
+    updatePasswordMutation.mutate({ currentPassword, newPassword });
+  };
 
   return (
     <MyPagePasswordForm>
@@ -97,16 +124,14 @@ const MyPagePasswordWrapper = () => {
             <MyPagePasswordInput
               placeholder="현재 사용중인 비밀번호를 입력해 주세요."
               type={'password'}
-              {...register('currentPassword', {
-                required: true,
-              })}
+              value={currentPassword}
+              onChange={onChangeCurrentPassword}
             />
             <MyPagePasswordInput
               placeholder="변경할 비밀번호를 입력해 주세요"
               type={'password'}
-              {...register('newPassword', {
-                required: true,
-              })}
+              value={newPassword}
+              onChange={onChangeNewPassword}
             />
             {/* <ErrorMessage>
             8자 이상, 영문/숫자/특수문자 중 2가지 이상 입력해주세요
@@ -118,7 +143,12 @@ const MyPagePasswordWrapper = () => {
               >
                 변경취소
               </MyPagePasswordEditButton>
-              <MyPagePasswordEditButton>저장하기</MyPagePasswordEditButton>
+              <MyPagePasswordEditButton
+                type={'button'}
+                onClick={onClickEditPassword}
+              >
+                저장하기
+              </MyPagePasswordEditButton>
             </MyPagePasswordEditButtonWrapper>
           </>
         )}

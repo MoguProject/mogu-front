@@ -202,7 +202,7 @@ const Signup = () => {
           <LoginLink href={'/auth/login'}>로그인</LoginLink>
         </GotoLogin>
       </SignupWrapper>
-      <AuthModal />
+      {/* <AuthModal /> */}
     </form>
   );
 };

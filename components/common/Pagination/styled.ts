@@ -50,7 +50,14 @@ export const PaginationBox = styled.div<{ active?: boolean }>`
   }
 `;
 
-export const PaginationButtonBox = styled(PaginationBox)`
+export const PaginationButtonBox = styled(PaginationBox)<{ disabled: boolean }>`
   border: 1px solid ${(props) => props.theme.colors.border};
   margin: 0 22px;
+  background-color: ${(props) =>
+    props.disabled ? props.theme.colors.border : null};
+
+  :hover {
+    opacity: ${(props) => (props.disabled ? `100%` : null)};
+    cursor: ${(props) => (props.disabled ? 'default' : 'pointer')}
+  }
 `;

@@ -11,3 +11,14 @@ export const useIsMobile = () => {
 
   return isMobile;
 };
+
+export const useIsDesktop = () => {
+  const [isDesktop, setIsDesktop] = useState(false);
+  const desktop = useMediaQuery({ query: '(min-width:1140px)' });
+
+  useEffect(() => {
+    setIsDesktop(desktop);
+  }, [desktop]);
+
+  return isDesktop;
+};

@@ -1,33 +1,87 @@
 import { GetServerSideProps } from 'next';
 import ProjectDesktopCard from '../../components/common/card/project/ProjectDesktopCard';
 import Layout from '../../components/Layout';
-import { ProjectStudyList } from './styled';
-import { ProjectsData } from '../../dummy/ProjectsData';
 import { FilterBoxWrapper } from './styled';
 import FilteredBox from '../../components/common/FilteredBox';
-import ProjectStudyHeader from '../../components/project-study';
 import axios from 'axios';
-import { QueryClient, dehydrate, useQuery } from 'react-query';
-import { axiosInstance } from 'axiosInstance';
+import { QueryClient, dehydrate, useQuery, useQueryClient } from 'react-query';
+import { getProjectStudyPostsApi } from 'utils/apis/posts';
+import { useState, useEffect } from 'react';
+import Pagination from 'components/common/Pagination';
+import { ProjectStudyDataInterface } from 'types';
+import styled from 'styled-components';
+import Link from 'next/link';
+import ProjectStudyDesktopHeader from 'components/project-study/DesktopHeader';
+
+const ProjectStudyContentWrapper = styled.div`
+  max-width: 1140px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  place-items: center;
+
+  @media (max-width: 991px) {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  @media (max-width: 724px) {
+    grid-template-columns: 1fr 1fr;
+  }
+`;
 
 const ProjectsPage = () => {
-  const { data } = useQuery(['projectStudyPosts'], () => {
-    return axiosInstance
-      .get('/projectstudy/list/all/1')
-      .then((res) => res.data);
-  });
+  const queryClient = useQueryClient();
+  const [currentPage, setCurrentPage] = useState(0);
+  const [currentCategory, setCurrentCategory] = useState(4);
+  const [currentSort, setCurrentSort] = useState<'recent' | 'liked' | 'opened'>(
+    'recent',
+  );
+  const { data } = useQuery<ProjectStudyDataInterface, Error>(
+    ['projectPosts', currentCategory ,currentPage, currentSort],
+    () => getProjectStudyPostsApi(currentCategory, currentPage, currentSort),
+    {
+      staleTime: 2000,
+    },
+  );
+
+  useEffect(() => {
+    if (currentPage < data?.totalPages) {
+      const nextPage = currentPage + 1;
+      queryClient.prefetchQuery(['projectPosts', currentCategory ,nextPage, currentSort], () =>
+        getProjectStudyPostsApi(currentCategory, nextPage, currentSort),
+      );
+    }
+  }, [currentPage, currentCategory, currentSort,queryClient]);
+
   console.log(data);
   return (
     <Layout>
-      <ProjectStudyHeader />
+      <ProjectStudyDesktopHeader
+        currentCategory={currentCategory}
+        setCurrentCategory={setCurrentCategory}
+      />
       <FilterBoxWrapper>
-        <FilteredBox />
+        <FilteredBox
+          setCurrentSort={setCurrentSort}
+          currentSort={currentSort}
+        />
       </FilterBoxWrapper>
-      <ProjectStudyList>
-        {ProjectsData.map((data) => (
-          <ProjectDesktopCard data={data} />
+      <ProjectStudyContentWrapper>
+        {data?.content.map((content) => (
+          <Link href={'/projects/detail'} style={{ marginBottom: 24 }}>
+            <ProjectDesktopCard data={content} key={content.postId} />
+          </Link>
         ))}
-      </ProjectStudyList>
+      </ProjectStudyContentWrapper>
+      {data ? (
+        <Pagination
+          currentPage={data.number}
+          totalPage={data.totalPages}
+          first={data.first}
+          last={data.last}
+          setCurrentPage={setCurrentPage}
+        />
+      ) : null}
     </Layout>
   );
 };
@@ -36,9 +90,9 @@ export default ProjectsPage;
 
 export const getServerSideProps: GetServerSideProps = async () => {
   const queryClient = new QueryClient();
-  await queryClient.prefetchQuery(['projectStudyPosts'], () => {
+  await queryClient.prefetchQuery(['projectPosts', 4,0, 'recent'], () => {
     return axios
-      .get('http://13.124.27.209:8080/projectstudy/list/all/1')
+      .get('http://13.124.27.209:8080/projectstudy/list/all/4?page=0&size=12')
       .then((response) => response.data);
   });
   return {

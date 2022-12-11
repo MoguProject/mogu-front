@@ -1,3 +1,6 @@
+import { Dispatch, SetStateAction, useEffect } from 'react';
+import { useQueryClient } from 'react-query';
+import { getProjectStudyPostsApi } from 'utils/apis/posts';
 import {
   PaginationBox,
   PaginationButtonBox,
@@ -6,19 +9,50 @@ import {
   NextIcon,
 } from './styled';
 
-const Pagination = () => {
+interface PagenationProps {
+  currentPage: number | undefined;
+  totalPage: number | undefined;
+  setCurrentPage: Dispatch<SetStateAction<number>>;
+  first: boolean;
+  last: boolean;
+}
+
+const Pagination = ({
+  currentPage,
+  totalPage,
+  setCurrentPage,
+  first,
+  last,
+}: PagenationProps) => {
+  const createPaginationBox = () => {
+    const arr = [];
+    for (let i = 1; i <= totalPage; i++) {
+      arr.push(
+        <PaginationBox
+          onClick={() => setCurrentPage(i - 1)}
+          active={currentPage + 1 === i}
+        >
+          {i}
+        </PaginationBox>,
+      );
+    }
+    return arr;
+  };
+
   return (
     <PaginationWrapper>
-      <PaginationButtonBox>
-        <PrevIcon />
+      <PaginationButtonBox
+        onClick={first ? null : () => setCurrentPage(currentPage - 1)}
+        disabled={first}
+      >
+        {'<'}
       </PaginationButtonBox>
-      <PaginationBox active={true}>1</PaginationBox>
-      <PaginationBox>2</PaginationBox>
-      <PaginationBox>3</PaginationBox>
-      <PaginationBox>4</PaginationBox>
-      <PaginationBox>5</PaginationBox>
-      <PaginationButtonBox>
-        <NextIcon />
+      {createPaginationBox()}
+      <PaginationButtonBox
+        onClick={last ? null : () => setCurrentPage(currentPage + 1)}
+        disabled={last}
+      >
+        {'>'}
       </PaginationButtonBox>
     </PaginationWrapper>
   );
