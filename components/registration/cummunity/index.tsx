@@ -7,6 +7,7 @@ import axios from 'axios';
 import { Container, ErrMessage, PostRegistrationForm } from './styled';
 import 'react-quill/dist/quill.snow.css';
 import dynamic from 'next/dynamic';
+import PostEditor from '../PostEditor';
 
 // react-quill 컴포넌트 분리 전 코드
 const ReactQuillWrapper = dynamic(() => import('react-quill'), {
