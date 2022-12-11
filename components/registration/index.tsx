@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import PostEditor from './Editor';
+import PostEditor from './PostEditor';
 import {
   FirstSection,
   LeftInput,

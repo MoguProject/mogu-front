@@ -1,7 +1,6 @@
+import { CommunityPostType } from 'components/community/CommunityWrapper';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useQuery } from 'react-query';
-
 import {
   CommunityPostFooter,
   CommunityPostHeader,
@@ -14,7 +13,8 @@ import {
   CommunityPostWrapper,
 } from './styled';
 
-const CommunityPost = ({ data }) => {
+const CommunityPost = ({ data }: { data: CommunityPostType }) => {
+  const contents = data.content;
   return (
     <CommunityPostWrapper>
       <CommunityPostLeft>
@@ -22,7 +22,9 @@ const CommunityPost = ({ data }) => {
         <CommunityPostTitle>
           <Link href={`/community/detail/${data.id}`}>{data.title}</Link>
         </CommunityPostTitle>
-        <CommunityPostSummary>{data.content}</CommunityPostSummary>
+        <CommunityPostSummary>
+          <div dangerouslySetInnerHTML={{ __html: contents }}></div>
+        </CommunityPostSummary>
         <CommunityPostFooter>
           <CommunityPostIconWrapper>
             <CommunityPostIcon
