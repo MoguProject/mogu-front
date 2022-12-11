@@ -6,7 +6,6 @@ export const CommunityHeaderWrapper = styled.section`
 `;
 
 export const CommunityHeaderFilter = styled.div`
-  margin-bottom: 24px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -23,7 +22,7 @@ export const CommunityHeaderSelectContent = styled.li<{ active?: boolean }>`
   cursor: pointer;
 
   border-bottom: ${(props) =>
-    props.active ? `2px solid ${props.theme.colors.red}` : 'none'};
+    props.active ? `2px solid ${props.theme.colors.green}` : 'none'};
 `;
 
 export const CommunityHeaderSearch = styled.div`

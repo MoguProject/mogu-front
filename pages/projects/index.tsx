@@ -37,7 +37,7 @@ const ProjectsPage = () => {
     'recent',
   );
   const { data } = useQuery<ProjectStudyDataInterface, Error>(
-    ['projectPosts', currentCategory ,currentPage, currentSort],
+    ['projectPosts', currentCategory, currentPage, currentSort],
     () => getProjectStudyPostsApi(currentCategory, currentPage, currentSort),
     {
       staleTime: 2000,
@@ -47,11 +47,12 @@ const ProjectsPage = () => {
   useEffect(() => {
     if (currentPage < data?.totalPages) {
       const nextPage = currentPage + 1;
-      queryClient.prefetchQuery(['projectPosts', currentCategory ,nextPage, currentSort], () =>
-        getProjectStudyPostsApi(currentCategory, nextPage, currentSort),
+      queryClient.prefetchQuery(
+        ['projectPosts', currentCategory, nextPage, currentSort],
+        () => getProjectStudyPostsApi(currentCategory, nextPage, currentSort),
       );
     }
-  }, [currentPage, currentCategory, currentSort,queryClient]);
+  }, [currentPage, currentCategory, currentSort, queryClient]);
 
   console.log(data);
   return (
@@ -68,8 +69,12 @@ const ProjectsPage = () => {
       </FilterBoxWrapper>
       <ProjectStudyContentWrapper>
         {data?.content.map((content) => (
-          <Link href={'/projects/detail'} style={{ marginBottom: 24 }}>
-            <ProjectDesktopCard data={content} key={content.postId} />
+          <Link
+            href={'/projects/detail'}
+            key={content.postId}
+            style={{ marginBottom: 24 }}
+          >
+            <ProjectDesktopCard data={content} />
           </Link>
         ))}
       </ProjectStudyContentWrapper>
@@ -90,7 +95,7 @@ export default ProjectsPage;
 
 export const getServerSideProps: GetServerSideProps = async () => {
   const queryClient = new QueryClient();
-  await queryClient.prefetchQuery(['projectPosts', 4,0, 'recent'], () => {
+  await queryClient.prefetchQuery(['projectPosts', 4, 0, 'recent'], () => {
     return axios
       .get('http://13.124.27.209:8080/projectstudy/list/all/4?page=0&size=12')
       .then((response) => response.data);
