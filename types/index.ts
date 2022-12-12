@@ -29,39 +29,38 @@ export interface MyPageEditSubmitData {
   skills: string[];
 }
 
-export interface ProjectStudyContentInterface {
+export interface CommunityContentInterface {
   categoryId: number;
   categoryName: string;
-  contactInfo: string;
-  contactMethod: string;
   content: string;
   createdAt: string;
   likeCount: number;
   likeStatus: boolean;
-  mainImage: string;
-  memberCount: number;
-  openStatus: boolean;
-  period: string;
-  postId: number;
-  postSkills: { id: number; skillName: string }[];
-  preferredMethod: string;
-  region: string;
-  startAt: string;
   title: string;
+  id?: number;
   updatedAt: string;
   userId: number;
   userNickname: string;
   view: number;
+  replyList: string[] | null;
 }
 
-export interface SortInterface {
-  empty: boolean;
-  sorted: boolean;
-  unsorted: boolean;
+export interface ProjectStudyContentInterface
+  extends CommunityContentInterface {
+  contactInfo: string;
+  contactMethod: string;
+  mainImage: string;
+  memberCount: number;
+  openStatus: boolean;
+  period: string;
+  postSkills: { id: number; skillName: string }[];
+  preferredMethod: string;
+  region: string;
+  startAt: string;
+  postId: number;
 }
 
-export interface ProjectStudyDataInterface {
-  content: ProjectStudyContentInterface[];
+export interface PostsDataInterface {
   empty: boolean;
   first: boolean;
   last: boolean;
@@ -79,4 +78,18 @@ export interface ProjectStudyDataInterface {
   sort: SortInterface;
   totalElements: number;
   totalPages: number;
+}
+
+export interface SortInterface {
+  empty: boolean;
+  sorted: boolean;
+  unsorted: boolean;
+}
+
+export interface CommunityDataInterface extends PostsDataInterface {
+  content: CommunityContentInterface[];
+}
+
+export interface ProjectStudyDataInterface extends PostsDataInterface {
+  content: ProjectStudyContentInterface[];
 }

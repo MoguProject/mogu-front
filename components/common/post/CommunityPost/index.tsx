@@ -1,6 +1,6 @@
-import { CommunityPostType } from 'components/community/CommunityWrapper';
 import Image from 'next/image';
 import Link from 'next/link';
+import { CommunityContentInterface } from 'types';
 import {
   CommunityPostFooter,
   CommunityPostHeader,
@@ -13,7 +13,7 @@ import {
   CommunityPostWrapper,
 } from './styled';
 
-const CommunityPost = ({ data }: { data: CommunityPostType }) => {
+const CommunityPost = ({ data }: { data: CommunityContentInterface }) => {
   const contents = data.content;
   return (
     <CommunityPostWrapper>
