@@ -28,9 +28,9 @@ const CommunityPostReview = ({ replyList }: { replyList: replyListType }) => {
       {openReply && (
         <ReplyWrapper>
           {replyList.children.length !== 0 &&
-            replyList.children.map((item: replyListType) => (
-              <Reply replyList={item} />
-            ))}
+            replyList.children
+              .reverse()
+              .map((item: replyListType) => <Reply replyList={item} />)}
         </ReplyWrapper>
       )}
     </>

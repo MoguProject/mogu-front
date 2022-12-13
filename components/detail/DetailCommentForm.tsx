@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { axiosInstance } from 'axiosInstance';
 import React, { useState } from 'react';
+import { useMutation, useQueryClient } from 'react-query';
 import styled from 'styled-components';
 
 const DetailCommentFormTitle = styled.h3`
@@ -43,34 +44,39 @@ export const DetailCommentFormButton = styled.button`
   }
 `;
 
-const DetailCommentForm = ({
-  isLoggedIn,
-  postId,
-}: {
-  isLoggedIn: boolean;
+type bodyType = {
+  content: string;
   postId: number;
-}) => {
+};
+const DetailCommentForm = ({ postId }: { postId: number }) => {
   const [comment, setComment] = useState('');
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setComment(e.target.value);
   };
-  const handleSubmit = async (e: React.ChangeEvent<HTMLInputElement>) => {
+
+  const queryClient = useQueryClient();
+  const mutation = useMutation(
+    (commentBody: bodyType) =>
+      axiosInstance.post(`/posts/reply/create/super/`, commentBody),
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries('postDetailData');
+      },
+    },
+  );
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const body = {
+    const commentBody = {
       content: comment,
       postId: postId,
     };
-    try {
-      const res = axios.post(
-        `http://13.124.27.209:8080/posts/reply/create/super/`,
-        body,
-      );
-      console.log('res:', res);
-      console.log('body', body);
-    } catch (error) {
-      console.log(error);
-    }
+
+    mutation.mutate(commentBody);
+    setComment('');
   };
+
   return (
     <>
       <DetailCommentFormWrapper onSubmit={handleSubmit}>
