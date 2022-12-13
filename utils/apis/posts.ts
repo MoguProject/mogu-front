@@ -1,11 +1,6 @@
 import axios from 'axios';
 import { axiosInstance } from 'axiosInstance';
 
-type dataType = {
-  categoryId: number;
-  page: number;
-};
-
 // 비 로그인 시
 export const getPostDataApi = (
   categoryId: number,
@@ -46,4 +41,15 @@ export const getProjectStudyPostsApi = (
       .then((response) => response.data);
   }
   return;
+};
+
+export const deletePostDataApi = (postId: number) => {
+  return axiosInstance
+    .post(`/posts/delete/${postId}`)
+    .then((response) => response.data);
+};
+export const updatePostDataApi = (postId: number) => {
+  return axiosInstance
+    .post(`/posts/update/${postId}`)
+    .then((response) => response.data);
 };
