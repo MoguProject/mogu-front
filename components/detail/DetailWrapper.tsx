@@ -3,13 +3,14 @@ import { axiosInstance } from 'axiosInstance';
 import CardState from 'components/common/CardState';
 import CardTags from 'components/common/CardTags';
 import { useRouter } from 'next/router';
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { ProjectStudyContentInterface } from 'types';
 import DetailCommentForm from './DetailCommentForm';
 
 const DetailWrapper = ({ data }: { data: ProjectStudyContentInterface }) => {
   const router = useRouter();
+  const [like, setLike] = useState(false);
 
   // 삭제하기 기능
   const deletePostData = async () => {
@@ -29,11 +30,30 @@ const DetailWrapper = ({ data }: { data: ProjectStudyContentInterface }) => {
     router.push(`/registration/community/edit/?postId=${data.id}`);
   };
 
+  // 좋아요 기능
+  const onChangeLike = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    setLike(!like);
+    const postId = data.id;
+    console.log('postId:', postId);
+    try {
+      const res = await axiosInstance.post(`/posts/like/${postId}`);
+      console.log('res:', res.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <DetailContainer>
       <DetailHeader>
         <DetailTitle>{data?.title}</DetailTitle>
-        <button>좋아요</button>
+        <LikeButton
+          className={data.likeStatus ? 'active' : ''}
+          onClick={onChangeLike}
+        >
+          좋아요
+        </LikeButton>
       </DetailHeader>
       <DetailSubHeader>
         <DetailHeaderItem>
@@ -113,10 +133,16 @@ const DetailHeader = styled.div`
   display: flex;
   align-items: center;
   gap: 20px;
+`;
 
-  button {
-    padding: 2px 5px;
-    border-radius: 10px;
+const LikeButton = styled.button`
+  padding: 2px 5px;
+  border-radius: 10px;
+
+  background-color: ${(props) => props.theme.colors.secondary};
+  color: ${(props) => props.theme.colors.white};
+
+  &.active {
     background-color: ${(props) => props.theme.colors.red};
     color: ${(props) => props.theme.colors.white};
   }
