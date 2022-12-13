@@ -11,6 +11,7 @@ const colors = {
   blueLight: '#ECF6FE',
   blueDark: '#3186C4',
   green: '#22C58B',
+  greenLight: '#26e09e',
   red: '#F86D7D',
 };
 
