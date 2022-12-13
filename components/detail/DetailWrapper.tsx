@@ -89,7 +89,9 @@ const DetailWrapper = ({ data }: { data: ProjectStudyContentInterface }) => {
       )}
 
       <DetailMain>{data.content}</DetailMain>
-      <CommunityBtnWrapper>
+      <DetailCommentForm isLoggedIn={true} postId={data.postId}/>
+    </DetailWrapper>
+        <CommunityBtnWrapper>
         <CommnityPostEditDeleteButton>수정하기</CommnityPostEditDeleteButton>
         <CommnityPostEditDeleteButton onClick={deletePostData}>
           삭제하기

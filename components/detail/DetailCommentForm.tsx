@@ -1,6 +1,12 @@
-import axios from 'axios';
 import { axiosInstance } from 'axiosInstance';
-import React, { useState } from 'react';
+import React, {
+  ChangeEvent,
+  FormEvent,
+  FormEventHandler,
+  useCallback,
+  useState,
+} from 'react';
+
 import styled from 'styled-components';
 
 const DetailCommentFormTitle = styled.h3`
@@ -24,6 +30,15 @@ const DetailCommentFormWrapper = styled.form`
     border-radius: 8px;
   }
 `;
+
+const DetailCommentInput = styled.textarea`
+  width: 100%;
+  height: 100%;
+  border: 1px solid ${(props) => props.theme.colors.border};
+  border-radius: 8px;
+  resize: none;
+`;
+
 
 export const DetailCommentFormHeader = styled.div`
   display: flex;
