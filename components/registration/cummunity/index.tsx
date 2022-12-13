@@ -8,6 +8,8 @@ import { Container, ErrMessage, PostRegistrationForm } from './styled';
 import 'react-quill/dist/quill.snow.css';
 import dynamic from 'next/dynamic';
 import PostEditor from '../PostEditor';
+import { getPostDataApi } from 'utils/apis/posts';
+import { axiosInstance } from 'axiosInstance';
 
 // react-quill 컴포넌트 분리 전 코드
 const ReactQuillWrapper = dynamic(() => import('react-quill'), {
@@ -44,11 +46,20 @@ const CommunityPostRegistration = () => {
     formData.append('content', data.content);
     formData.append('title', data.title);
     try {
-      const response = await axios.post('/posts/create', formData, {
-        headers: {
-          'Content-Type': 'multipart/formdata',
+      const response = await axiosInstance.post(
+        '/posts/create',
+        {
+          categoryId: data.categoryId,
+          content: data.content,
+          title: data.title,
         },
-      });
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        },
+      );
+      // multipart/formdata
       console.log(response);
     } catch (error) {
       console.log(error);

@@ -2,26 +2,32 @@ import styled from 'styled-components';
 
 export const CommunityPostReviewList = styled.div`
   width: 100%;
-  margin-top: 20px;
+  margin-top: 10px;
   padding: 10px;
 `;
 
 export const CommunityPostReviewHeader = styled.div`
-  display: flex;
-  align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
+  span {
+    font-weight: 500;
+  }
 `;
 
-export const CommunityPostReviewHeaderInfo = styled.div`
-  margin-left: 10px;
+export const CommunityPostReviewBody = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  gap: 10px;
+  align-items: flex-start;
 
   span {
     padding: 2px;
-    :last-child {
-      color: ${(props) => props.theme.colors.secondary};
-    }
+    color: ${(props) => props.theme.colors.secondary};
+  }
+
+  button {
+    background-color: ${(props) => props.theme.colors.blueLight};
+    border: 1px solid ${(props) => props.theme.colors.border};
+    border-radius: 4px;
+    padding: 5px;
   }
 `;

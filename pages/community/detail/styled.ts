@@ -4,11 +4,9 @@ export const CommunityHeaderWrapper = styled.section`
   width: 100%;
   padding: 10px;
 `;
-export const CommunityPostWrapper = styled.div``;
 export const CommunityBtnWrapper = styled.div`
-  margin: 20px 0;
   display: flex;
-  justify-content: flex-end;
+  /* justify-content: flex-end; */
 `;
 
 export const CommnityPostEditDeleteButton = styled.button`

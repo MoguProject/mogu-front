@@ -43,6 +43,7 @@ export interface CommunityContentInterface {
   userNickname: string;
   view: number;
   replyList: string[] | null;
+  postId: number;
 }
 
 export interface ProjectStudyContentInterface
@@ -92,4 +93,15 @@ export interface CommunityDataInterface extends PostsDataInterface {
 
 export interface ProjectStudyDataInterface extends PostsDataInterface {
   content: ProjectStudyContentInterface[];
+}
+
+export interface replyListType {
+  id: number;
+  userId: number;
+  content: string;
+  targetNickname: string;
+  deleteStatus: boolean;
+  createAt: string;
+  updateAt: string;
+  children: replyListType[];
 }
