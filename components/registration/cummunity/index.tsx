@@ -5,6 +5,9 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { Container, ErrMessage, PostRegistrationForm } from './styled';
 import 'react-quill/dist/quill.snow.css';
 import dynamic from 'next/dynamic';
+import ReactQuillEditor from '../Editor';
+import PostEditor from '../PostEditor';
+import { getPostDataApi } from 'utils/apis/posts';
 import { axiosInstance } from 'axiosInstance';
 
 // react-quill 컴포넌트 분리 전 코드
@@ -29,14 +32,7 @@ const CommunityPostRegistration = () => {
   } = useForm<FormValues>({
     mode: 'onChange',
   });
-  const [content, setContent] = useState('');
-  const onChangeContents = (value: string) => {
-    setContent(value);
-    setValue('content', value);
-    trigger('content');
-  };
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
-    console.log('data:', data);
     try {
       const response = await axiosInstance.post(
         '/posts/create',
@@ -72,11 +68,7 @@ const CommunityPostRegistration = () => {
           {...register('title', { required: true })}
         />
         {errors.title && <ErrMessage>제목을 작성해주세요.</ErrMessage>}
-        <ReactQuillWrapper
-          onChange={onChangeContents}
-          value={content}
-          theme="snow"
-        />
+        <ReactQuillEditor />
         <RegistrationButton>등록하기</RegistrationButton>
       </PostRegistrationForm>
     </Container>

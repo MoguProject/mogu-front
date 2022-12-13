@@ -100,13 +100,11 @@ const DetailWrapper = ({ data }: { data: ProjectStudyContentInterface }) => {
           </DetailDetailWrapper>
         </DetailPageDetail>
       )}
-      <DetailMain>
-        <div dangerouslySetInnerHTML={{ __html: data.content }}></div>
-      </DetailMain>
-      <CommunityBtnWrapper>
-        <CommnityPostEditDeleteButton onClick={updatePostPage}>
-          수정하기
-        </CommnityPostEditDeleteButton>
+      <DetailMain>{data.content}</DetailMain>
+      <DetailCommentForm isLoggedIn={true} postId={data.postId}/>
+    </DetailWrapper>
+        <CommunityBtnWrapper>
+        <CommnityPostEditDeleteButton>수정하기</CommnityPostEditDeleteButton>
         <CommnityPostEditDeleteButton onClick={deletePostData}>
           삭제하기
         </CommnityPostEditDeleteButton>
