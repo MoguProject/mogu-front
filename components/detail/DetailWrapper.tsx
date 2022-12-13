@@ -125,7 +125,7 @@ const DetailWrapper = ({ data }: { data: ProjectStudyContentInterface }) => {
         </DetailDetailWrapper>
       </DetailPageDetail>
       <DetailMain>{data.content}</DetailMain>
-      <DetailCommentForm isLoggedIn={true} />
+      <DetailCommentForm isLoggedIn={true} postId={data.postId}/>
     </DetailWrapper>
   );
 };
