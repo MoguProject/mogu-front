@@ -14,16 +14,17 @@ import {
 } from './styled';
 
 const CommunityPost = ({ data }: { data: CommunityContentInterface }) => {
-  const contents = data.content;
   return (
     <CommunityPostWrapper>
       <CommunityPostLeft>
         <CommunityPostHeader>{data.categoryName}</CommunityPostHeader>
         <CommunityPostTitle>
-          <Link href={`/community/detail/${data.id}`}>{data.title}</Link>
+          <Link href={`/community/detail/?postId=${data.id}`}>
+            {data.title}
+          </Link>
         </CommunityPostTitle>
         <CommunityPostSummary>
-          <div dangerouslySetInnerHTML={{ __html: contents }}></div>
+          <div dangerouslySetInnerHTML={{ __html: data.content }}></div>
         </CommunityPostSummary>
         <CommunityPostFooter>
           <CommunityPostIconWrapper>

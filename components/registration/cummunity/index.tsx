@@ -1,14 +1,10 @@
 import React, { useState } from 'react';
-import 'react-quill/dist/quill.snow.css';
 import { RegistrationButton } from '../styled';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import axios from 'axios';
 
 import { Container, ErrMessage, PostRegistrationForm } from './styled';
 import 'react-quill/dist/quill.snow.css';
 import dynamic from 'next/dynamic';
-import PostEditor from '../PostEditor';
-import { getPostDataApi } from 'utils/apis/posts';
 import { axiosInstance } from 'axiosInstance';
 
 // react-quill 컴포넌트 분리 전 코드
@@ -41,10 +37,6 @@ const CommunityPostRegistration = () => {
   };
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
     console.log('data:', data);
-    const formData = new FormData();
-    formData.append('categoryId', data.categoryId);
-    formData.append('content', data.content);
-    formData.append('title', data.title);
     try {
       const response = await axiosInstance.post(
         '/posts/create',
@@ -59,7 +51,6 @@ const CommunityPostRegistration = () => {
           },
         },
       );
-      // multipart/formdata
       console.log(response);
     } catch (error) {
       console.log(error);
@@ -69,10 +60,7 @@ const CommunityPostRegistration = () => {
   return (
     <Container>
       <h1>글쓰기</h1>
-      <PostRegistrationForm
-        onSubmit={handleSubmit(onSubmit)}
-        encType="multipart/form-data"
-      >
+      <PostRegistrationForm onSubmit={handleSubmit(onSubmit)}>
         <select {...register('categoryId')}>
           <option value={1}>팀 프로젝트</option>
           <option value={2}>개인 프로젝트</option>
