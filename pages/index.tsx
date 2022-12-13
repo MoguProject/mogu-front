@@ -5,6 +5,7 @@ import MainBottom from '../components/main/MainBottom';
 import { QueryClient } from 'react-query';
 import axios from 'axios';
 import { dehydrate } from 'react-query';
+import { axiosInstance } from 'axiosInstance';
 
 const Home: NextPage = () => {
   return (
@@ -25,8 +26,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   if (context.req && cookie) {
     axios.defaults.headers.Cookie = cookie;
     await queryClient.prefetchQuery(['user'], () => {
-      return axios
-        .get('http://13.124.27.209:8080/user/login/info')
+      return axiosInstance
+        .get('/user/login/info')
         .then((response) => response.data);
     });
     console.log(queryClient);
