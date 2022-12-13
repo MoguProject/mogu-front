@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
-import 'react-quill/dist/quill.snow.css';
 import { RegistrationButton } from '../styled';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import axios from 'axios';
 
 import { Container, ErrMessage, PostRegistrationForm } from './styled';
 import 'react-quill/dist/quill.snow.css';
@@ -49,7 +47,6 @@ const CommunityPostRegistration = () => {
           },
         },
       );
-      // multipart/formdata
       console.log(response);
     } catch (error) {
       console.log(error);
@@ -59,10 +56,7 @@ const CommunityPostRegistration = () => {
   return (
     <Container>
       <h1>글쓰기</h1>
-      <PostRegistrationForm
-        onSubmit={handleSubmit(onSubmit)}
-        encType="multipart/form-data"
-      >
+      <PostRegistrationForm onSubmit={handleSubmit(onSubmit)}>
         <select {...register('categoryId')}>
           <option value={1}>팀 프로젝트</option>
           <option value={2}>개인 프로젝트</option>
