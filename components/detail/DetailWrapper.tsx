@@ -5,10 +5,16 @@ import CardTags from 'components/common/CardTags';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { ProjectStudyContentInterface } from 'types';
+import { ProjectStudyContentInterface, UserLoginReturnData } from 'types';
 import DetailCommentForm from './DetailCommentForm';
 
-const DetailWrapper = ({ data }: { data: ProjectStudyContentInterface }) => {
+const DetailWrapper = ({
+  data,
+  userInfo,
+}: {
+  data: ProjectStudyContentInterface;
+  userInfo: UserLoginReturnData;
+}) => {
   const router = useRouter();
   const [like, setLike] = useState(false);
 
@@ -76,6 +82,7 @@ const DetailWrapper = ({ data }: { data: ProjectStudyContentInterface }) => {
           ))}
         </DetailTagWrapper>
       )}
+
       {data.preferredMethod && (
         <DetailPageDetail>
           <DetailDetailWrapper>
@@ -101,15 +108,21 @@ const DetailWrapper = ({ data }: { data: ProjectStudyContentInterface }) => {
         </DetailPageDetail>
       )}
       <DetailMain>{data.content}</DetailMain>
-      <DetailCommentForm isLoggedIn={true} postId={data.postId}/>
-    </DetailWrapper>
+      {data.userNickname === userInfo.nickname && (
         <CommunityBtnWrapper>
-        <CommnityPostEditDeleteButton>수정하기</CommnityPostEditDeleteButton>
-        <CommnityPostEditDeleteButton onClick={deletePostData}>
-          삭제하기
-        </CommnityPostEditDeleteButton>
-      </CommunityBtnWrapper>
-      <DetailCommentForm postId={data.id} />
+          <CommnityPostEditDeleteButton onClick={updatePostPage}>
+            수정하기
+          </CommnityPostEditDeleteButton>
+          <CommnityPostEditDeleteButton onClick={deletePostData}>
+            삭제하기
+          </CommnityPostEditDeleteButton>
+        </CommunityBtnWrapper>
+      )}
+      <DetailCommentForm
+        isLoggedIn={true}
+        postId={data.postId}
+        replyList={data.replyList}
+      />
     </DetailContainer>
   );
 };

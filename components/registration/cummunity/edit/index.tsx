@@ -1,19 +1,12 @@
 import { axiosInstance } from 'axiosInstance';
-import { RegistrationButton } from 'components/registration/styled';
-import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import 'react-quill/dist/quill.snow.css';
 import { CommunityContentInterface } from 'types';
 import { FormValues } from '..';
 import { Container, ErrMessage, PostRegistrationForm } from '../styled';
 import styled from 'styled-components';
-
-const ReactQuillWrapper = dynamic(() => import('react-quill'), {
-  ssr: false,
-  loading: () => <p>Loading...</p>,
-});
+import ReactCommunityQuillEditor from 'components/registration/Editor/community';
 
 const CommunityPostRegistrationEdit = ({
   data,
@@ -33,15 +26,19 @@ const CommunityPostRegistrationEdit = ({
   });
   const [title, setTitle] = useState(data.title);
   const [content, setContent] = useState(data.content);
-  const onChangeContents = (value: string) => {
-    setContent(value);
-    setValue('content', value);
-    trigger('content');
-  };
+
   const onChangeTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value);
   };
   const postId = data.id;
+
+  // 취소하기 기능
+  const onHandleCancle = () => {
+    console.log(data.title);
+    setTitle(data.title);
+    setContent(data.content);
+  };
+
   // 수정하기 기능
   const onUpdateSubmit: SubmitHandler<FormValues> = async (data) => {
     console.log('formData:', data);
@@ -80,39 +77,57 @@ const CommunityPostRegistrationEdit = ({
           {...register('title', { required: true })}
         />
         {errors.title && <ErrMessage>제목을 작성해주세요.</ErrMessage>}
-        <ReactQuillWrapper
-          onChange={onChangeContents}
-          value={content}
-          theme="snow"
+        <ReactCommunityQuillEditor
+          text={content}
+          setValue={setValue}
+          trigger={trigger}
         />
         <ButtonWrapper>
           <RegistrationEditButton>저장하기</RegistrationEditButton>
-          <RegistrationEditButton onClick={() => {}}>
-            취소하기
-          </RegistrationEditButton>
         </ButtonWrapper>
       </PostRegistrationForm>
+      <ButtonWrapper>
+        <RegistrationCancleButton onClick={onHandleCancle}>
+          취소하기
+        </RegistrationCancleButton>
+      </ButtonWrapper>
     </Container>
   );
 };
 
 export default CommunityPostRegistrationEdit;
 
-export const ButtonWrapper = styled.div`
+const ButtonWrapper = styled.div`
   display: flex;
   justify-content: flex-end;
-  gap: 30px;
 `;
+
 export const RegistrationEditButton = styled.button`
   padding: 8px 30px;
   color: ${(props) => props.theme.colors.secondary};
   border: 1px solid ${(props) => props.theme.colors.border};
   border-radius: 4px;
   width: 150px;
-  margin: 20px 0;
-
+  bottom: 0;
+  position: relative;
+  right: 200px;
   :hover {
     background-color: ${(props) => props.theme.colors.green};
+    color: ${(props) => props.theme.colors.white};
+  }
+`;
+
+export const RegistrationCancleButton = styled.button`
+  padding: 8px 30px;
+  color: ${(props) => props.theme.colors.secondary};
+  border: 1px solid ${(props) => props.theme.colors.border};
+  border-radius: 4px;
+  width: 150px;
+  position: relative;
+  top: -54px;
+
+  :hover {
+    background-color: ${(props) => props.theme.colors.red};
     color: ${(props) => props.theme.colors.white};
   }
 `;

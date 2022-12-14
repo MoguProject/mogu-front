@@ -1,20 +1,14 @@
 import React, { useState } from 'react';
 import { RegistrationButton } from '../styled';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { useRouter } from 'next/router';
 
 import { Container, ErrMessage, PostRegistrationForm } from './styled';
 import 'react-quill/dist/quill.snow.css';
 import dynamic from 'next/dynamic';
 import ReactQuillEditor from '../Editor';
-import PostEditor from '../PostEditor';
 import { getPostDataApi } from 'utils/apis/posts';
 import { axiosInstance } from 'axiosInstance';
-
-// react-quill 컴포넌트 분리 전 코드
-const ReactQuillWrapper = dynamic(() => import('react-quill'), {
-  ssr: false,
-  loading: () => <p>Loading...</p>,
-});
 
 export type FormValues = {
   categoryId: string;
@@ -23,6 +17,7 @@ export type FormValues = {
 };
 
 const CommunityPostRegistration = () => {
+  const router = useRouter();
   const {
     handleSubmit,
     register,
@@ -32,7 +27,9 @@ const CommunityPostRegistration = () => {
   } = useForm<FormValues>({
     mode: 'onChange',
   });
+
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
+    console.log('data:', data);
     try {
       const response = await axiosInstance.post(
         '/posts/create',
@@ -48,6 +45,7 @@ const CommunityPostRegistration = () => {
         },
       );
       console.log(response);
+      router.push('/community');
     } catch (error) {
       console.log(error);
     }
@@ -68,7 +66,7 @@ const CommunityPostRegistration = () => {
           {...register('title', { required: true })}
         />
         {errors.title && <ErrMessage>제목을 작성해주세요.</ErrMessage>}
-        <ReactQuillEditor />
+        <ReactQuillEditor setValue={setValue} trigger={trigger} />
         <RegistrationButton>등록하기</RegistrationButton>
       </PostRegistrationForm>
     </Container>

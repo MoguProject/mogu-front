@@ -9,6 +9,7 @@ import React, {
 } from 'react';
 
 import styled from 'styled-components';
+import { ReplyListType } from 'types';
 
 const DetailCommentFormTitle = styled.h3`
   font-weight: 500;
@@ -40,7 +41,6 @@ const DetailCommentInput = styled.textarea`
   resize: none;
 `;
 
-
 export const DetailCommentFormHeader = styled.div`
   display: flex;
   justify-content: space-between;
@@ -59,14 +59,21 @@ export const DetailCommentFormButton = styled.button`
   }
 `;
 
-type bodyType = {
+interface bodyType {
   content: string;
   postId: number;
-};
-const DetailCommentForm = ({ postId }: { postId: number }) => {
+}
+
+const DetailCommentForm = ({
+  postId,
+  replyList,
+}: {
+  postId: number;
+  replyList: ReplyListType[];
+}) => {
   const [comment, setComment] = useState('');
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setComment(e.target.value);
   };
 
@@ -96,10 +103,10 @@ const DetailCommentForm = ({ postId }: { postId: number }) => {
     <>
       <DetailCommentFormWrapper onSubmit={handleSubmit}>
         <DetailCommentFormHeader>
-          <DetailCommentFormTitle>댓글</DetailCommentFormTitle>
+          <DetailCommentFormTitle>{`댓글 ${replyList.length}`}</DetailCommentFormTitle>
           <DetailCommentFormButton>댓글 달기</DetailCommentFormButton>
         </DetailCommentFormHeader>
-        <input type="text" value={comment} onChange={handleChange} />
+        <DetailCommentInput onChange={handleChange} value={comment} />
       </DetailCommentFormWrapper>
     </>
   );

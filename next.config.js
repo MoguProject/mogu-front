@@ -17,20 +17,15 @@ const nextConfig = {
   },
 };
 
-const removeImports = require('next-remove-imports')();
-module.exports = removeImports({
-  ...nextConfig,
-});
+// module.exports = (phase, { defaultConfig }) => {
+//   const rewrites = () => {
+//     return [
+//       {
+//         source: '/:path*',
+//         destination: 'http://13.124.27.209:8080/:path*',
+//       },
+//     ];
+//   };
 
-module.exports = (phase, { defaultConfig }) => {
-  const rewrites = () => {
-    return [
-      {
-        source: '/:path*',
-        destination: 'http://13.124.27.209:8080/:path*',
-      },
-    ];
-  };
-
-  return { rewrites };
-};
+//   return { rewrites };
+// };

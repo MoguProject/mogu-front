@@ -95,7 +95,7 @@ export interface ProjectStudyDataInterface extends PostsDataInterface {
   content: ProjectStudyContentInterface[];
 }
 
-export interface replyListType {
+export interface ReplyListType {
   id: number;
   userId: number;
   content: string;
@@ -103,5 +103,6 @@ export interface replyListType {
   deleteStatus: boolean;
   createAt: string;
   updateAt: string;
-  children: replyListType[];
+  children: ReplyListType[];
+  userNickname: string;
 }
