@@ -19,9 +19,7 @@ const CommunityPost = ({ data }: { data: CommunityContentInterface }) => {
       <CommunityPostLeft>
         <CommunityPostHeader>{data.categoryName}</CommunityPostHeader>
         <CommunityPostTitle>
-          <Link href={`/community/detail/?postId=${data.id}`}>
-            {data.title}
-          </Link>
+          <Link href={`/community/detail/${data.id}`}>{data.title}</Link>
         </CommunityPostTitle>
         <CommunityPostSummary>
           <div dangerouslySetInnerHTML={{ __html: data.content }}></div>
