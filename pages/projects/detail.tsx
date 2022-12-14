@@ -4,6 +4,7 @@ import Layout from 'components/Layout';
 import React from 'react';
 import { useQuery } from 'react-query';
 import { ProjectStudyContentInterface } from 'types';
+import { loadMyInfo } from 'utils/apis/user';
 const detail = () => {
   const { data, isLoading, isError } = useQuery<ProjectStudyContentInterface>(
     'postDetail',
@@ -13,6 +14,8 @@ const detail = () => {
         .then((response) => response.data);
     },
   );
+  const userInfoData = useQuery('userInfoData', loadMyInfo);
+
   console.log(data);
   if (isLoading) {
     <div>로딩중</div>;
@@ -25,7 +28,7 @@ const detail = () => {
   if (data) {
     return (
       <Layout>
-        <DetailWrapper data={data} />
+        <DetailWrapper data={data} userInfo={userInfoData.data} />
       </Layout>
     );
   }

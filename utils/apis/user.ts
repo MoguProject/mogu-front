@@ -47,7 +47,7 @@ export const getMyPageUserDataApi = () => {
   return axiosInstance.get('/user/mypage').then((response) => response.data);
 };
 
-export const updateMyPageUserDataAp = (data) => {
+export const updateMyPageUserDataAp = (data: any) => {
   return axios
     .put('/user/update', data, {
       headers: {
@@ -81,6 +81,6 @@ export const getMyPageLikedApi = () => {
     .then((response) => response.data);
 };
 
-export const myPageChangePasswordApi = (data) => {
+export const myPageChangePasswordApi = (data: any) => {
   return axiosInstance.put('/user/update/password', data);
 };

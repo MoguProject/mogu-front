@@ -1,7 +1,7 @@
 import { GetServerSideProps } from 'next';
 import ProjectDesktopCard from '../../components/common/card/project/ProjectDesktopCard';
 import Layout from '../../components/Layout';
-import { FilterBoxWrapper } from './styled';
+
 import FilteredBox from '../../components/common/FilteredBox';
 import axios from 'axios';
 import { QueryClient, dehydrate, useQuery, useQueryClient } from 'react-query';
@@ -106,3 +106,18 @@ export const getServerSideProps: GetServerSideProps = async () => {
     },
   };
 };
+
+export const FilterBoxWrapper = styled.div`
+  margin-top: 18px;
+  margin-bottom: 30px;
+`;
+
+export const ProjectStudyList = styled.section`
+  margin: 0 auto;
+  max-width: 1140px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 28px;
+`;

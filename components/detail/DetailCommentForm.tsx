@@ -67,9 +67,11 @@ interface bodyType {
 const DetailCommentForm = ({
   postId,
   replyList,
+  isLoggedIn,
 }: {
   postId: number;
-  replyList: ReplyListType[];
+  replyList: string[];
+  isLoggedIn: boolean;
 }) => {
   const [comment, setComment] = useState('');
 
