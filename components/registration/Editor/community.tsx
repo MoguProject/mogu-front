@@ -36,15 +36,17 @@ const formats = [
   'video',
 ];
 
-const ReactQuillEditor = ({
+const ReactCommunityQuillEditor = ({
+  text,
   setValue,
   trigger,
 }: {
+  text: string;
   setValue: UseFormSetValue<FormValues>;
   trigger: UseFormTrigger<FormValues>;
 }) => {
   const quillRef = useRef<any>();
-  const [content, setContent] = useState('');
+  const [content, setContent] = useState(text || '');
   const onChangeValue = (text: string) => {
     console.log(text);
     setContent(text);
@@ -116,4 +118,4 @@ const ReactQuillEditor = ({
   );
 };
 
-export default ReactQuillEditor;
+export default ReactCommunityQuillEditor;
