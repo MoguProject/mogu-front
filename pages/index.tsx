@@ -21,6 +21,7 @@ export default Home;
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const queryClient = new QueryClient();
+  console.log('context.req:', context.req);
   const cookie = context.req ? context.req.headers.cookie : '';
   axios.defaults.headers.Cookie = '';
   if (context.req && cookie) {
@@ -30,7 +31,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
         .get('/user/login/info')
         .then((response) => response.data);
     });
-    console.log(queryClient);
     return {
       props: {
         dehydratedState: JSON.parse(JSON.stringify(dehydrate(queryClient))),

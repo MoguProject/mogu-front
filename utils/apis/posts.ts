@@ -8,12 +8,12 @@ export const getPostDataApi = (
   currentSort: 'recent' | 'liked',
 ) => {
   if (currentSort === 'recent') {
-    return axiosInstance
+    return axios
       .get(`posts/list/${categoryId}?page=${page}&size=10`)
       .then((response) => response.data);
   }
   if (currentSort === 'liked') {
-    return axiosInstance
+    return axios
       .get(`posts/list/likes/${categoryId}?page=${page}&size=10`)
       .then((response) => response.data);
   }
@@ -44,12 +44,12 @@ export const getProjectStudyPostsApi = (
 };
 
 export const deletePostDataApi = (postId: number) => {
-  return axiosInstance
+  return axios
     .post(`/posts/delete/${postId}`)
     .then((response) => response.data);
 };
 export const updatePostDataApi = (postId: number) => {
-  return axiosInstance
+  return axios
     .post(`/posts/update/${postId}`)
     .then((response) => response.data);
 };
