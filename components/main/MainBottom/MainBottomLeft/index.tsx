@@ -20,6 +20,7 @@ const MainBottomLeft = () => {
     const getNewPostsData = async () => {
       try {
         const response = await getPostDataApi(categoryId, 0, 'recent');
+        console.log(response);
         const newData = response.content.slice(0, 5);
         setNewPost(newData);
       } catch (err) {
