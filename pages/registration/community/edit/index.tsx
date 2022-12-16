@@ -1,7 +1,6 @@
 import { axiosInstance } from 'axiosInstance';
 import Layout from 'components/Layout';
-import CommunityPostRegistration from 'components/registration/cummunity';
-import CommunityPostRegistrationEdit from 'components/registration/cummunity/edit';
+import CommunityPostRegistrationEdit from 'components/registration/Community/edit';
 import { useRouter } from 'next/router';
 import { useQuery } from 'react-query';
 

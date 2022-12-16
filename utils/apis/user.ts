@@ -4,10 +4,16 @@ import { LoginSubmitData, SignupSubmitData } from 'types';
 
 export const loginApi = ({ email, password }: LoginSubmitData) => {
   return axiosInstance
-    .post('/user/login', {
-      email,
-      password,
-    })
+    .post(
+      '/users/login',
+      {
+        email,
+        password,
+      },
+      {
+        withCredentials: true,
+      },
+    )
     .then((response) => response.data);
 };
 
@@ -19,7 +25,7 @@ export const signupApi = ({
   phone,
 }: SignupSubmitData) => {
   return axiosInstance
-    .post('/user/create', {
+    .post('/users/create', {
       email,
       name,
       nickname,
@@ -31,25 +37,25 @@ export const signupApi = ({
 
 export const loadMyInfo = (token: any) => {
   return axiosInstance
-    .get('/user/login/info')
+    .get('/users/login/info')
     .then((response) => response.data);
 };
 
 export const emailCertificateApi = (email: string) => {
   return axiosInstance
-    .post('/user/email/certificate', {
+    .post('/users/email/certificate', {
       email,
     })
     .then((response) => response.data);
 };
 
 export const getMyPageUserDataApi = () => {
-  return axiosInstance.get('/user/mypage').then((response) => response.data);
+  return axiosInstance.get('/users/mypage').then((response) => response.data);
 };
 
 export const updateMyPageUserDataAp = (data: any) => {
   return axios
-    .put('/user/update', data, {
+    .put('/users/update', data, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
@@ -59,28 +65,47 @@ export const updateMyPageUserDataAp = (data: any) => {
 
 export const getMyPageProjectPostsApi = () => {
   return axiosInstance
-    .get('/user/mypage/post/project')
+    .get('/users/mypage/post/project')
     .then((response) => response.data);
 };
 
 export const getMyPageStudyPostsApi = () => {
   return axiosInstance
-    .get('/user/mypage/post/study')
+    .get('/users/mypage/post/study')
     .then((response) => response.data);
 };
 
 export const getMyPageRepliedApi = () => {
   return axiosInstance
-    .get('/user/mypage/post/replied')
+    .get('/users/mypage/post/replied')
     .then((response) => response.data);
 };
 
 export const getMyPageLikedApi = () => {
   return axiosInstance
-    .get('/user/mypage/post/liked')
+    .get('/users/mypage/post/liked')
     .then((response) => response.data);
 };
 
+<<<<<<< HEAD
+export const myPageChangePasswordApi = (data) => {
+  return axiosInstance
+    .put('/users/update/password', data)
+    .then((res) => res.data);
+};
+
+export const createNewPasswordApi = ({
+  email,
+  name,
+}: {
+  email: string;
+  name: string;
+}) => {
+  return axiosInstance
+    .post('/users/email/create/new-password', { email, name })
+    .then((res) => res.data);
+=======
 export const myPageChangePasswordApi = (data: any) => {
   return axiosInstance.put('/user/update/password', data);
+>>>>>>> develop
 };

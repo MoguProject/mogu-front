@@ -3,6 +3,7 @@ import styled from 'styled-components';
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 20px;
   max-width: 1140px;
   margin: 0 auto;
@@ -19,14 +20,9 @@ export const Container = styled.div`
 export const PostRegistrationForm = styled.form`
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  gap: 20px;
-
-  select,
-  input {
-    font-size: 15px;
-    padding: 10px;
-  }
+  justify-content: center;
+  align-items: center;
+  width: 80%;
 `;
 
 export const ErrMessage = styled.p`

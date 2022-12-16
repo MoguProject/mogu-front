@@ -1,15 +1,8 @@
 import { axiosInstance } from 'axiosInstance';
 import { useMutation, useQueryClient } from 'react-query';
-import React, {
-  ChangeEvent,
-  FormEvent,
-  FormEventHandler,
-  useCallback,
-  useState,
-} from 'react';
+import React, { useState } from 'react';
 
 import styled from 'styled-components';
-import { ReplyListType } from 'types';
 
 const DetailCommentFormTitle = styled.h3`
   font-weight: 500;
@@ -25,20 +18,17 @@ const DetailCommentFormWrapper = styled.form`
   display: flex;
   flex-direction: column;
   gap: 5px;
-  input {
+  textarea {
     width: 100%;
     height: 100%;
     border: 1px solid ${(props) => props.theme.colors.border};
     border-radius: 8px;
+    resize: none;
+    padding: 8px;
+    :focus {
+      outline: ${(props) => props.theme.colors.green};
+    }
   }
-`;
-
-const DetailCommentInput = styled.textarea`
-  width: 100%;
-  height: 100%;
-  border: 1px solid ${(props) => props.theme.colors.border};
-  border-radius: 8px;
-  resize: none;
 `;
 
 export const DetailCommentFormHeader = styled.div`
@@ -59,46 +49,40 @@ export const DetailCommentFormButton = styled.button`
   }
 `;
 
-interface bodyType {
+interface CommentFormSubmitData {
   content: string;
   postId: number;
 }
-
 const DetailCommentForm = ({
   postId,
-  replyList,
   isLoggedIn,
+  replyList,
 }: {
+  isLoggedIn: boolean;
   postId: number;
   replyList: string[];
-  isLoggedIn: boolean;
 }) => {
-  const [comment, setComment] = useState('');
+  const [content, setContent] = useState('');
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setComment(e.target.value);
+    setContent(e.target.value);
   };
 
   const queryClient = useQueryClient();
-  const mutation = useMutation(
-    (commentBody: bodyType) =>
+  const { mutate } = useMutation(
+    (commentBody: CommentFormSubmitData) =>
       axiosInstance.post(`/posts/reply/create/super/`, commentBody),
     {
       onSuccess: () => {
         queryClient.invalidateQueries('postDetailData');
+        setContent('');
       },
     },
   );
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const commentBody = {
-      content: comment,
-      postId: postId,
-    };
-
-    mutation.mutate(commentBody);
-    setComment('');
+    mutate({ postId, content });
   };
 
   return (
@@ -108,7 +92,11 @@ const DetailCommentForm = ({
           <DetailCommentFormTitle>{`댓글 ${replyList.length}`}</DetailCommentFormTitle>
           <DetailCommentFormButton>댓글 달기</DetailCommentFormButton>
         </DetailCommentFormHeader>
-        <DetailCommentInput onChange={handleChange} value={comment} />
+        <textarea
+          value={content}
+          onChange={handleChange}
+          placeholder={'댓글을 입력 해 주세요'}
+        />
       </DetailCommentFormWrapper>
     </>
   );

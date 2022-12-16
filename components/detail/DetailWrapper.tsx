@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { axiosInstance } from 'axiosInstance';
 import CardState from 'components/common/CardState';
 import CardTags from 'components/common/CardTags';
@@ -13,7 +12,7 @@ const DetailWrapper = ({
   userInfo,
 }: {
   data: ProjectStudyContentInterface;
-  userInfo: UserLoginReturnData;
+  userInfo?: UserLoginReturnData;
 }) => {
   const router = useRouter();
   const [like, setLike] = useState(false);

@@ -1,9 +1,9 @@
 import { axiosInstance } from 'axiosInstance';
 import dynamic from 'next/dynamic';
-import { MutableRefObject, useRef, useMemo, useState } from 'react';
-import { UseFormSetValue, UseFormTrigger } from 'react-hook-form';
+import { useRef, useMemo, useState } from 'react';
 import { ReactQuillProps } from 'react-quill';
-import { FormValues } from '../cummunity';
+import { SetterOrUpdater } from 'recoil';
+import styled from 'styled-components';
 
 interface ReactQuillPropsType extends ReactQuillProps {
   forwardedRef: any;
@@ -37,19 +37,16 @@ const formats = [
 ];
 
 const ReactQuillEditor = ({
+  value,
   setValue,
-  trigger,
 }: {
-  setValue: UseFormSetValue<FormValues>;
-  trigger: UseFormTrigger<FormValues>;
+  value: string;
+  setValue: SetterOrUpdater<string>;
 }) => {
   const quillRef = useRef<any>();
-  const [content, setContent] = useState('');
-  const onChangeValue = (text: string) => {
-    console.log(text);
-    setContent(text);
-    setValue('content', content);
-    trigger('content');
+  const onChangeValue = (content: string) => {
+    console.log(content);
+    setValue(content);
   };
 
   const imageHandler = () => {
@@ -105,15 +102,21 @@ const ReactQuillEditor = ({
     [],
   );
   return (
-    <ReactQuill
+    <ReactQuillWrapper
       forwardedRef={quillRef}
       modules={modules}
       placeholder={''}
       formats={formats}
       onChange={onChangeValue}
-      value={content}
+      value={''}
     />
   );
 };
+
+const ReactQuillWrapper = styled(ReactQuill)`
+  width: 100%;
+  height: 600px;
+  padding: 36px 0;
+`;
 
 export default ReactQuillEditor;

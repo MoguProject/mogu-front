@@ -6,7 +6,7 @@ const SelectInputWrapper = styled.div<{ width: string; readOnly?: boolean }>`
   display: inline-flex;
   align-items: center;
   width: ${(props) => `${props.width}`};
-  height: 36px;
+  height: 48px;
   position: relative;
   select {
     -o-appearance: none;
@@ -14,7 +14,6 @@ const SelectInputWrapper = styled.div<{ width: string; readOnly?: boolean }>`
     -moz-appearance: none;
     appearance: none;
     position: relative;
-    z-index: 3;
     padding: 4px 14px;
     width: inherit;
     height: inherit;
