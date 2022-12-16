@@ -1,20 +1,12 @@
-import React, { useState } from 'react';
 import { RegistrationButton } from '../styled';
 import { SubmitHandler, useForm } from 'react-hook-form';
-
 import { Container, ErrMessage, PostRegistrationForm } from './styled';
 import 'react-quill/dist/quill.snow.css';
 import dynamic from 'next/dynamic';
 import ReactQuillEditor from '../Editor';
-import PostEditor from '../PostEditor';
-import { getPostDataApi } from 'utils/apis/posts';
 import { axiosInstance } from 'axiosInstance';
-
-// react-quill 컴포넌트 분리 전 코드
-const ReactQuillWrapper = dynamic(() => import('react-quill'), {
-  ssr: false,
-  loading: () => <p>Loading...</p>,
-});
+import SelectInput from 'components/common/input/SelectInput';
+import Registration from '../index';
 
 export type FormValues = {
   categoryId: string;
@@ -55,21 +47,15 @@ const CommunityPostRegistration = () => {
 
   return (
     <Container>
-      <h1>글쓰기</h1>
       <PostRegistrationForm onSubmit={handleSubmit(onSubmit)}>
-        <select {...register('categoryId')}>
-          <option value={1}>팀 프로젝트</option>
-          <option value={2}>개인 프로젝트</option>
-          <option value={3}>자유로운 글</option>
-        </select>
-        <input
-          type="text"
-          placeholder="제목을 작성해주세요."
-          {...register('title', { required: true })}
-        />
-        {errors.title && <ErrMessage>제목을 작성해주세요.</ErrMessage>}
-        <ReactQuillEditor />
-        <RegistrationButton>등록하기</RegistrationButton>
+        {/* <SelectInput width="80%">
+          <select {...register('categoryId')}>
+            <option value={1}>팀 프로젝트</option>
+            <option value={2}>개인 프로젝트</option>
+            <option value={3}>자유로운 글</option>
+          </select>
+        </SelectInput> */}
+        <Registration register={register} />
       </PostRegistrationForm>
     </Container>
   );

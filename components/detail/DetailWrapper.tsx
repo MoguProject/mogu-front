@@ -45,72 +45,72 @@ const DetailWrapper = ({ data }: { data: ProjectStudyContentInterface }) => {
   };
 
   return (
-    <DetailContainer>
-      <DetailHeader>
-        <DetailTitle>{data?.title}</DetailTitle>
-        <LikeButton
-          className={data.likeStatus ? 'active' : ''}
-          onClick={onChangeLike}
-        >
-          좋아요
-        </LikeButton>
-      </DetailHeader>
-      <DetailSubHeader>
-        <DetailHeaderItem>
-          <span>{data.userNickname}</span>
-          <span style={{ margin: '0 2px' }}>|</span>
-          {data.startAt && <span>{data.startAt}</span>}
-          <DetailStateWrapper>
-            {data.openStatus && <CardState state={data.openStatus} />}
-          </DetailStateWrapper>
-        </DetailHeaderItem>
-        <DetailHeaderItem>
-          <span>{data.likeCount} like</span>
-          <span>{data.view} views</span>
-        </DetailHeaderItem>
-      </DetailSubHeader>
-      {data.postSkills && (
-        <DetailTagWrapper>
-          {data.postSkills.map((tag) => (
-            <CardTags tag={tag.skillName} key={tag.id} />
-          ))}
-        </DetailTagWrapper>
-      )}
-      {data.preferredMethod && (
-        <DetailPageDetail>
-          <DetailDetailWrapper>
-            <DetailDetailKey>모집 구분</DetailDetailKey>
-            <DetailDetailCenter>·</DetailDetailCenter>
-            <DetailDetailValue>{data.categoryName}</DetailDetailValue>
-          </DetailDetailWrapper>
-          <DetailDetailWrapper>
-            <DetailDetailKey>진행 방식</DetailDetailKey>
-            <DetailDetailCenter>·</DetailDetailCenter>
-            <DetailDetailValue>{data.preferredMethod}</DetailDetailValue>
-          </DetailDetailWrapper>
-          <DetailDetailWrapper>
-            <DetailDetailKey>시작 일자</DetailDetailKey>
-            <DetailDetailCenter>·</DetailDetailCenter>
-            <DetailDetailValue>{data.startAt}</DetailDetailValue>
-          </DetailDetailWrapper>
-          <DetailDetailWrapper>
-            <DetailDetailKey>진행 지역</DetailDetailKey>
-            <DetailDetailCenter>·</DetailDetailCenter>
-            <DetailDetailValue>{data.region}</DetailDetailValue>
-          </DetailDetailWrapper>
-        </DetailPageDetail>
-      )}
-      <DetailMain>{data.content}</DetailMain>
-      <DetailCommentForm isLoggedIn={true} postId={data.postId}/>
-    </DetailWrapper>
+    <>
+      <DetailContainer>
+        <DetailHeader>
+          <DetailTitle>{data?.title}</DetailTitle>
+          <LikeButton
+            className={data.likeStatus ? 'active' : ''}
+            onClick={onChangeLike}
+          >
+            좋아요
+          </LikeButton>
+        </DetailHeader>
+        <DetailSubHeader>
+          <DetailHeaderItem>
+            <span>{data.userNickname}</span>
+            <span style={{ margin: '0 2px' }}>|</span>
+            {data.startAt && <span>{data.startAt}</span>}
+            <DetailStateWrapper>
+              {data.openStatus && <CardState state={data.openStatus} />}
+            </DetailStateWrapper>
+          </DetailHeaderItem>
+          <DetailHeaderItem>
+            <span>{data.likeCount} like</span>
+            <span>{data.view} views</span>
+          </DetailHeaderItem>
+        </DetailSubHeader>
+        {data.postSkills && (
+          <DetailTagWrapper>
+            {data.postSkills.map((tag) => (
+              <CardTags tag={tag.skillName} key={tag.id} />
+            ))}
+          </DetailTagWrapper>
+        )}
+        {data.preferredMethod && (
+          <DetailPageDetail>
+            <DetailDetailWrapper>
+              <DetailDetailKey>모집 구분</DetailDetailKey>
+              <DetailDetailCenter>·</DetailDetailCenter>
+              <DetailDetailValue>{data.categoryName}</DetailDetailValue>
+            </DetailDetailWrapper>
+            <DetailDetailWrapper>
+              <DetailDetailKey>진행 방식</DetailDetailKey>
+              <DetailDetailCenter>·</DetailDetailCenter>
+              <DetailDetailValue>{data.preferredMethod}</DetailDetailValue>
+            </DetailDetailWrapper>
+            <DetailDetailWrapper>
+              <DetailDetailKey>시작 일자</DetailDetailKey>
+              <DetailDetailCenter>·</DetailDetailCenter>
+              <DetailDetailValue>{data.startAt}</DetailDetailValue>
+            </DetailDetailWrapper>
+            <DetailDetailWrapper>
+              <DetailDetailKey>진행 지역</DetailDetailKey>
+              <DetailDetailCenter>·</DetailDetailCenter>
+              <DetailDetailValue>{data.region}</DetailDetailValue>
+            </DetailDetailWrapper>
+          </DetailPageDetail>
+        )}
+        <DetailMain>{data.content}</DetailMain>
+        <DetailCommentForm isLoggedIn={true} postId={data.postId} />
         <CommunityBtnWrapper>
-        <CommnityPostEditDeleteButton>수정하기</CommnityPostEditDeleteButton>
-        <CommnityPostEditDeleteButton onClick={deletePostData}>
-          삭제하기
-        </CommnityPostEditDeleteButton>
-      </CommunityBtnWrapper>
-      <DetailCommentForm postId={data.id} />
-    </DetailContainer>
+          <CommnityPostEditDeleteButton>수정하기</CommnityPostEditDeleteButton>
+          <CommnityPostEditDeleteButton onClick={deletePostData}>
+            삭제하기
+          </CommnityPostEditDeleteButton>
+        </CommunityBtnWrapper>
+      </DetailContainer>
+    </>
   );
 };
 

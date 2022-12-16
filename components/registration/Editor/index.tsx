@@ -1,7 +1,10 @@
 import { axiosInstance } from 'axiosInstance';
 import dynamic from 'next/dynamic';
-import { MutableRefObject, useRef, useMemo, useState } from 'react';
+import { useRef, useMemo, useState } from 'react';
+import { UseFormRegister } from 'react-hook-form';
 import { ReactQuillProps } from 'react-quill';
+import { SetterOrUpdater } from 'recoil';
+import styled from 'styled-components';
 
 interface ReactQuillPropsType extends ReactQuillProps {
   forwardedRef: any;
@@ -34,9 +37,14 @@ const formats = [
   'video',
 ];
 
-const ReactQuillEditor = () => {
+const ReactQuillEditor = ({
+  value,
+  setValue,
+}: {
+  value: string;
+  setValue: SetterOrUpdater<string>;
+}) => {
   const quillRef = useRef<any>();
-  const [value, setValue] = useState('');
   const onChangeValue = (content: string) => {
     console.log(content);
     setValue(content);
@@ -95,7 +103,7 @@ const ReactQuillEditor = () => {
     [],
   );
   return (
-    <ReactQuill
+    <ReactQuillWrapper
       forwardedRef={quillRef}
       modules={modules}
       placeholder={''}
@@ -105,5 +113,11 @@ const ReactQuillEditor = () => {
     />
   );
 };
+
+const ReactQuillWrapper = styled(ReactQuill)`
+  width: 100%;
+  height: 600px;
+  padding: 36px 0;
+`;
 
 export default ReactQuillEditor;

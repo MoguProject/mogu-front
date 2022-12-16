@@ -27,21 +27,23 @@ const DetailCommunity = () => {
     return <p>Loading...</p>;
   }
 
-  return (
-    <Layout>
-      <CommunityWrapper>
-        <CommunityHeaderWrapper>
-          <DetailWrapper data={data} />
-        </CommunityHeaderWrapper>
-        {data.replyList.length !== 0 &&
-          data.replyList
-            .reverse()
-            .map((item: replyListType) => (
-              <CommunityPostReview replyList={item} />
-            ))}
-      </CommunityWrapper>
-    </Layout>
-  );
+  if (data) {
+    return (
+      <Layout>
+        <CommunityWrapper>
+          <CommunityHeaderWrapper>
+            <DetailWrapper data={data} />
+          </CommunityHeaderWrapper>
+          {data.replyList.length !== 0 &&
+            data.replyList
+              .reverse()
+              .map((item: replyListType) => (
+                <CommunityPostReview replyList={item} />
+              ))}
+        </CommunityWrapper>
+      </Layout>
+    );
+  }
 };
 
 export default DetailCommunity;

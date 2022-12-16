@@ -1,7 +1,4 @@
 import { atom } from 'recoil';
-import { recoilPersist } from 'recoil-persist';
-
-const { persistAtom } = recoilPersist();
 
 export const authModalState = atom<boolean>({
   key: 'authModal',
@@ -21,4 +18,9 @@ export const userCertValue = atom<string>({
 export const onEditProfileState = atom<boolean>({
   key: 'onEditProfileState',
   default: false,
+});
+
+export const projectStudyQuillValue = atom<string>({
+  key: 'projectStudyQuillValue',
+  default: '',
 });

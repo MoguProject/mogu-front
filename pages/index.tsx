@@ -20,6 +20,7 @@ const Home: NextPage = () => {
 export default Home;
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
+  console.log(context.req.cookies);
   const queryClient = new QueryClient();
   const cookie = context.req ? context.req.headers.cookie : '';
   axios.defaults.headers.Cookie = '';
@@ -27,7 +28,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     axios.defaults.headers.Cookie = cookie;
     await queryClient.prefetchQuery(['user'], () => {
       return axiosInstance
-        .get('/user/login/info')
+        .get('/users/login/info')
         .then((response) => response.data);
     });
     console.log(queryClient);

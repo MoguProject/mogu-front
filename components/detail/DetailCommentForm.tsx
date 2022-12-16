@@ -24,22 +24,18 @@ const DetailCommentFormWrapper = styled.form`
   display: flex;
   flex-direction: column;
   gap: 5px;
-  input {
+  textarea {
     width: 100%;
     height: 100%;
     border: 1px solid ${(props) => props.theme.colors.border};
     border-radius: 8px;
+    resize: none;
+    padding: 8px;
+    :focus {
+      outline: ${(props) => props.theme.colors.green};
+    }
   }
 `;
-
-const DetailCommentInput = styled.textarea`
-  width: 100%;
-  height: 100%;
-  border: 1px solid ${(props) => props.theme.colors.border};
-  border-radius: 8px;
-  resize: none;
-`;
-
 
 export const DetailCommentFormHeader = styled.div`
   display: flex;
@@ -59,37 +55,38 @@ export const DetailCommentFormButton = styled.button`
   }
 `;
 
-type bodyType = {
+interface CommentFormSubmitData {
   content: string;
   postId: number;
-};
-const DetailCommentForm = ({ postId }: { postId: number }) => {
-  const [comment, setComment] = useState('');
+}
+const DetailCommentForm = ({
+  postId,
+  isLoggedIn,
+}: {
+  isLoggedIn: boolean;
+  postId: number;
+}) => {
+  const [content, setContent] = useState('');
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setComment(e.target.value);
+  const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setContent(e.target.value);
   };
 
   const queryClient = useQueryClient();
-  const mutation = useMutation(
-    (commentBody: bodyType) =>
+  const { mutate } = useMutation(
+    (commentBody: CommentFormSubmitData) =>
       axiosInstance.post(`/posts/reply/create/super/`, commentBody),
     {
       onSuccess: () => {
         queryClient.invalidateQueries('postDetailData');
+        setContent('');
       },
     },
   );
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const commentBody = {
-      content: comment,
-      postId: postId,
-    };
-
-    mutation.mutate(commentBody);
-    setComment('');
+    mutate({ postId, content });
   };
 
   return (
@@ -99,7 +96,11 @@ const DetailCommentForm = ({ postId }: { postId: number }) => {
           <DetailCommentFormTitle>댓글</DetailCommentFormTitle>
           <DetailCommentFormButton>댓글 달기</DetailCommentFormButton>
         </DetailCommentFormHeader>
-        <input type="text" value={comment} onChange={handleChange} />
+        <textarea
+          value={content}
+          onChange={handleChange}
+          placeholder={'댓글을 입력 해 주세요'}
+        />
       </DetailCommentFormWrapper>
     </>
   );

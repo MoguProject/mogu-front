@@ -178,7 +178,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     axios.defaults.headers.Cookie = cookie;
     await queryClient.prefetchQuery(['mypageData'], () => {
       return axios
-        .get('http://13.124.27.209:8080/user/mypage')
+        .get('http://13.124.27.209:8080/users/mypage')
         .then((response) => response.data);
     });
     return {

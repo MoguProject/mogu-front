@@ -7,6 +7,7 @@ import { RecoilRoot } from 'recoil';
 import GlobalStyles from '../styles/globalStyle';
 import { theme } from '../styles/theme';
 import Head from 'next/head';
+import 'react-quill/dist/quill.snow.css';
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [queryClient] = useState(() => new QueryClient());

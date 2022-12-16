@@ -1,5 +1,5 @@
 import Layout from 'components/Layout';
-import CommunityPostRegistration from 'components/registration/cummunity';
+import CommunityPostRegistration from 'components/registration/Community';
 import React from 'react';
 
 const CommunityRegistrationPage = () => {
