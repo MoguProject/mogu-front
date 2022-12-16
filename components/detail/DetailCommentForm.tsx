@@ -1,12 +1,6 @@
 import { axiosInstance } from 'axiosInstance';
 import { useMutation, useQueryClient } from 'react-query';
-import React, {
-  ChangeEvent,
-  FormEvent,
-  FormEventHandler,
-  useCallback,
-  useState,
-} from 'react';
+import React, { useState } from 'react';
 
 import styled from 'styled-components';
 
@@ -62,9 +56,11 @@ interface CommentFormSubmitData {
 const DetailCommentForm = ({
   postId,
   isLoggedIn,
+  replyList,
 }: {
   isLoggedIn: boolean;
   postId: number;
+  replyList: string[];
 }) => {
   const [content, setContent] = useState('');
 
@@ -93,7 +89,7 @@ const DetailCommentForm = ({
     <>
       <DetailCommentFormWrapper onSubmit={handleSubmit}>
         <DetailCommentFormHeader>
-          <DetailCommentFormTitle>댓글</DetailCommentFormTitle>
+          <DetailCommentFormTitle>{`댓글 ${replyList.length}`}</DetailCommentFormTitle>
           <DetailCommentFormButton>댓글 달기</DetailCommentFormButton>
         </DetailCommentFormHeader>
         <textarea

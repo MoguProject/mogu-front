@@ -53,7 +53,7 @@ export const getMyPageUserDataApi = () => {
   return axiosInstance.get('/users/mypage').then((response) => response.data);
 };
 
-export const updateMyPageUserDataAp = (data) => {
+export const updateMyPageUserDataAp = (data: any) => {
   return axios
     .put('/users/update', data, {
       headers: {
@@ -87,6 +87,7 @@ export const getMyPageLikedApi = () => {
     .then((response) => response.data);
 };
 
+<<<<<<< HEAD
 export const myPageChangePasswordApi = (data) => {
   return axiosInstance
     .put('/users/update/password', data)
@@ -103,4 +104,8 @@ export const createNewPasswordApi = ({
   return axiosInstance
     .post('/users/email/create/new-password', { email, name })
     .then((res) => res.data);
+=======
+export const myPageChangePasswordApi = (data: any) => {
+  return axiosInstance.put('/user/update/password', data);
+>>>>>>> develop
 };

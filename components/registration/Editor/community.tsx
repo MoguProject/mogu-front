@@ -1,9 +1,9 @@
 import { axiosInstance } from 'axiosInstance';
 import dynamic from 'next/dynamic';
-import { useRef, useMemo, useState } from 'react';
+import { MutableRefObject, useRef, useMemo, useState } from 'react';
+import { UseFormSetValue, UseFormTrigger } from 'react-hook-form';
 import { ReactQuillProps } from 'react-quill';
-import { SetterOrUpdater } from 'recoil';
-import styled from 'styled-components';
+import { FormValues } from '../cummunity';
 
 interface ReactQuillPropsType extends ReactQuillProps {
   forwardedRef: any;
@@ -36,17 +36,22 @@ const formats = [
   'video',
 ];
 
-const ReactQuillEditor = ({
-  value,
+const ReactCommunityQuillEditor = ({
+  text,
   setValue,
+  trigger,
 }: {
-  value: string;
-  setValue: SetterOrUpdater<string>;
+  text: string;
+  setValue: UseFormSetValue<FormValues>;
+  trigger: UseFormTrigger<FormValues>;
 }) => {
   const quillRef = useRef<any>();
-  const onChangeValue = (content: string) => {
-    console.log(content);
-    setValue(content);
+  const [content, setContent] = useState(text || '');
+  const onChangeValue = (text: string) => {
+    console.log(text);
+    setContent(text);
+    setValue('content', content);
+    trigger('content');
   };
 
   const imageHandler = () => {
@@ -102,21 +107,15 @@ const ReactQuillEditor = ({
     [],
   );
   return (
-    <ReactQuillWrapper
+    <ReactQuill
       forwardedRef={quillRef}
       modules={modules}
       placeholder={''}
       formats={formats}
       onChange={onChangeValue}
-      value={''}
+      value={content}
     />
   );
 };
 
-const ReactQuillWrapper = styled(ReactQuill)`
-  width: 100%;
-  height: 600px;
-  padding: 36px 0;
-`;
-
-export default ReactQuillEditor;
+export default ReactCommunityQuillEditor;

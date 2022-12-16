@@ -1,13 +1,13 @@
-import { replyListType } from 'types';
+import { ReplyListType } from 'types';
 import { CommunityPostReviewBody, CommunityPostReviewHeader } from './styled';
 import styled from 'styled-components';
 
 //대댓글 컴포넌트
-const Reply = ({ replyList }: { replyList: replyListType }) => {
+const Reply = ({ replyList }: { replyList: ReplyListType }) => {
   return (
     <CommunityPostReplyList>
       <CommunityPostReviewHeader>
-        <span> ⌊ userId : {replyList.userId}</span>
+        <span> ⌊ {replyList.userNickname}</span>
       </CommunityPostReviewHeader>
       <CommunityPostReviewBody>
         <p>{replyList.content}</p>

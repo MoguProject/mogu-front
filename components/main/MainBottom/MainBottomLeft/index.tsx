@@ -1,6 +1,6 @@
-import { CommunityPostType } from 'components/community/CommunityWrapper';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
+import { CommunityContentInterface } from 'types';
 import { getPostDataApi } from 'utils/apis/posts';
 import CommunityPost from '../../../common/post/CommunityPost';
 
@@ -19,7 +19,8 @@ const MainBottomLeft = () => {
   useEffect(() => {
     const getNewPostsData = async () => {
       try {
-        const response = await getPostDataApi(categoryId);
+        const response = await getPostDataApi(categoryId, 0, 'recent');
+        console.log(response);
         const newData = response.content.slice(0, 5);
         setNewPost(newData);
       } catch (err) {
@@ -45,10 +46,10 @@ const MainBottomLeft = () => {
           </li>
         </MainBottomLeftSelect>
         <MainBottomLeftMoreButtom>
-          <Link href="/community/category/1">더보기</Link>
+          <Link href="/community">더보기</Link>
         </MainBottomLeftMoreButtom>
       </MainBottomLeftHeader>
-      {newPost.map((item: CommunityPostType) => (
+      {newPost.map((item: CommunityContentInterface) => (
         <CommunityPost key={item.id} data={item} />
       ))}
     </MainBottomLeftWrapper>

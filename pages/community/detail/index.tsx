@@ -1,12 +1,11 @@
 import Layout from 'components/Layout';
 import styled from 'styled-components';
-import { CommunityHeaderWrapper } from './styled';
 
 import { useRouter } from 'next/router';
 import { useQuery, useMutation } from 'react-query';
 import axios from 'axios';
 import DetailWrapper from 'components/detail/DetailWrapper';
-import { replyListType } from 'types';
+import { ReplyListType } from 'types';
 import CommunityPostReview from 'components/community/CommunityReview/comment';
 import { axiosInstance } from 'axiosInstance';
 
@@ -31,13 +30,11 @@ const DetailCommunity = () => {
     return (
       <Layout>
         <CommunityWrapper>
-          <CommunityHeaderWrapper>
-            <DetailWrapper data={data} />
-          </CommunityHeaderWrapper>
+          <DetailWrapper data={data} />
           {data.replyList.length !== 0 &&
             data.replyList
               .reverse()
-              .map((item: replyListType) => (
+              .map((item: ReplyListType) => (
                 <CommunityPostReview replyList={item} />
               ))}
         </CommunityWrapper>

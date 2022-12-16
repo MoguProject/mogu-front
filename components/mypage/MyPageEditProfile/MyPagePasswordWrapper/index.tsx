@@ -80,8 +80,8 @@ const MyPagePasswordWrapper = () => {
       queryClient.invalidateQueries(['mypageData']);
     },
     onError: (error) => {
-      console.log(error.response.data);
-      alert(error.response.data);
+      console.log(error);
+      alert(error);
     },
   });
 

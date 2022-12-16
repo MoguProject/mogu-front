@@ -1,4 +1,4 @@
-import { replyListType } from 'types';
+import { ReplyListType } from 'types';
 import Reply from './reply';
 import {
   CommunityPostReviewBody,
@@ -9,7 +9,7 @@ import styled from 'styled-components';
 import { useState } from 'react';
 
 // 댓글 컴포넌트
-const CommunityPostReview = ({ replyList }: { replyList: replyListType }) => {
+const CommunityPostReview = ({ replyList }: { replyList: ReplyListType }) => {
   console.log('replyList:', replyList);
   const [openReply, setOpenReply] = useState(false);
 
@@ -17,7 +17,7 @@ const CommunityPostReview = ({ replyList }: { replyList: replyListType }) => {
     <>
       <CommunityPostReviewList>
         <CommunityPostReviewHeader>
-          <span>userId : {replyList.userId}</span>
+          <span>{replyList.userNickname}</span>
         </CommunityPostReviewHeader>
         <CommunityPostReviewBody>
           <p>{replyList.content}</p>
@@ -28,9 +28,9 @@ const CommunityPostReview = ({ replyList }: { replyList: replyListType }) => {
       {openReply && (
         <ReplyWrapper>
           {replyList.children.length !== 0 &&
-            replyList.children
-              .reverse()
-              .map((item: replyListType) => <Reply replyList={item} />)}
+            replyList.children.map((item: ReplyListType) => (
+              <Reply replyList={item} />
+            ))}
         </ReplyWrapper>
       )}
     </>
