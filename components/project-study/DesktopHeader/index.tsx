@@ -15,7 +15,6 @@ const ProjectStudyDesktopHeader = ({
   setCurrentCategory: Dispatch<SetStateAction<number>>;
 }) => {
   const onClickCategoryProjects = () => {
-    console.log('change!');
     setCurrentCategory(4);
   };
 

@@ -29,3 +29,10 @@ export const ErrMessage = styled.p`
   color: ${(props) => props.theme.colors.red};
   font-size: 12px;
 `;
+
+export const CommunityRegistrationButtonWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 100%;
+`;
