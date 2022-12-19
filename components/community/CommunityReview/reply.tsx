@@ -7,11 +7,11 @@ const Reply = ({ replyList }: { replyList: ReplyListType }) => {
   return (
     <CommunityPostReplyList>
       <CommunityPostReviewHeader>
-        <span> ⌊ {replyList.userNickname}</span>
+        <span>{replyList.userNickname}</span>
+        <div>{replyList.createAt.slice(0, 10)}</div>
       </CommunityPostReviewHeader>
       <CommunityPostReviewBody>
         <p>{replyList.content}</p>
-        <span>{replyList.createAt.slice(0, 10)}</span>
       </CommunityPostReviewBody>
     </CommunityPostReplyList>
   );
@@ -23,5 +23,4 @@ export const CommunityPostReplyList = styled.div`
   width: 100%;
   margin-top: 5px;
   padding: 10px;
-  background-color: ${(props) => props.theme.colors.blueLight};
 `;

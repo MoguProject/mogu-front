@@ -1,7 +1,12 @@
 import { RegistrationButton } from '../styled';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useRouter } from 'next/router';
-import { Container, ErrMessage, PostRegistrationForm } from './styled';
+import {
+  Container,
+  ErrMessage,
+  PostRegistrationForm,
+  CommunityRegistrationButtonWrapper,
+} from './styled';
 import 'react-quill/dist/quill.snow.css';
 import { axiosInstance } from 'axiosInstance';
 import SelectInput from 'components/common/input/SelectInput';
@@ -18,8 +23,6 @@ const CommunityPostRegistration = () => {
   const {
     handleSubmit,
     register,
-    setValue,
-    trigger,
     formState: { errors },
   } = useForm<FormValues>({
     mode: 'onChange',
@@ -58,14 +61,11 @@ const CommunityPostRegistration = () => {
             <option value={3}>자유로운 글</option>
           </select>
         </SelectInput>
-        <input
-          type="text"
-          placeholder="제목을 작성해주세요."
-          {...register('title', { required: true })}
-        />
         {errors.title && <ErrMessage>제목을 작성해주세요.</ErrMessage>}
         <Registration register={register} />
-        <RegistrationButton>등록하기</RegistrationButton>
+        <CommunityRegistrationButtonWrapper>
+          <RegistrationButton>등록하기</RegistrationButton>
+        </CommunityRegistrationButtonWrapper>
       </PostRegistrationForm>
     </Container>
   );

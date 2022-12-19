@@ -27,11 +27,14 @@ const ProjectDesktopImageWrapper = styled.div`
 
 const ProjectDesktopCard = ({
   data,
+  main,
 }: {
   data: ProjectStudyContentInterface;
+  main?: boolean;
 }) => {
+  console.log('mainProjectData', data);
   return (
-    <ProjectDesktopCardWrapper>
+    <ProjectDesktopCardWrapper main={main}>
       <ProjectDesktopImageWrapper>
         <Image
           src={data.mainImage}
@@ -41,9 +44,9 @@ const ProjectDesktopCard = ({
         />
       </ProjectDesktopImageWrapper>
       <TagsWrapper>
-        {data.postSkills.map((category) => (
+        {/* {data.postSkills.map((category) => (
           <CardTags tag={category.skillName} key={category.id} />
-        ))}
+        ))} */}
         <CardState state={data.openStatus} />
       </TagsWrapper>
       <ProjectDesktopCardTitle>{data.title}</ProjectDesktopCardTitle>

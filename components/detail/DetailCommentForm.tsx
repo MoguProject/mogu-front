@@ -3,18 +3,19 @@ import { useMutation, useQueryClient } from 'react-query';
 import React, { useState } from 'react';
 
 import styled from 'styled-components';
+import { ReplyListType } from 'types';
 
 const DetailCommentFormTitle = styled.h3`
   font-weight: 500;
-  font-size: 18px;
+  font-size: 16px;
   color: ${(props) => props.theme.colors.primary};
-  margin-bottom: 18px;
+  margin-bottom: 12px;
 `;
 
 const DetailCommentFormWrapper = styled.form`
   width: 100%;
   margin: 0 auto;
-  height: 8rem;
+  height: 12rem;
   display: flex;
   flex-direction: column;
   gap: 5px;
@@ -25,6 +26,7 @@ const DetailCommentFormWrapper = styled.form`
     border-radius: 8px;
     resize: none;
     padding: 8px;
+    margin-bottom: 12px;
     :focus {
       outline: ${(props) => props.theme.colors.green};
     }
@@ -36,16 +38,23 @@ export const DetailCommentFormHeader = styled.div`
   justify-content: space-between;
 `;
 
+export const DetailCommentFormButtonWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 100%;
+`;
+
 export const DetailCommentFormButton = styled.button`
-  padding: 1px 10px;
+  padding: 8px 12px;
   color: ${(props) => props.theme.colors.white};
-  background-color: ${(props) => props.theme.colors.greenLight};
+  background-color: ${(props) => props.theme.colors.green};
   border: none;
   border-radius: 4px;
   font-weight: 500;
-
+  transition: all 0.2s ease-in-out;
   :hover {
-    background-color: ${(props) => props.theme.colors.green};
+    opacity: 0.7;
   }
 `;
 
@@ -60,7 +69,7 @@ const DetailCommentForm = ({
 }: {
   isLoggedIn: boolean;
   postId: number;
-  replyList: string[];
+  replyList: ReplyListType[];
 }) => {
   const [content, setContent] = useState('');
 
@@ -89,14 +98,16 @@ const DetailCommentForm = ({
     <>
       <DetailCommentFormWrapper onSubmit={handleSubmit}>
         <DetailCommentFormHeader>
-          <DetailCommentFormTitle>{`댓글 ${replyList.length}`}</DetailCommentFormTitle>
-          <DetailCommentFormButton>댓글 달기</DetailCommentFormButton>
+          <DetailCommentFormTitle>{`댓글 ${replyList.length}개`}</DetailCommentFormTitle>
         </DetailCommentFormHeader>
         <textarea
           value={content}
           onChange={handleChange}
-          placeholder={'댓글을 입력 해 주세요'}
+          placeholder={'댓글을 입력해 주세요.'}
         />
+        <DetailCommentFormButtonWrapper>
+          <DetailCommentFormButton>댓글 달기</DetailCommentFormButton>
+        </DetailCommentFormButtonWrapper>
       </DetailCommentFormWrapper>
     </>
   );

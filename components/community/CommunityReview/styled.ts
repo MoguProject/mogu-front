@@ -1,15 +1,27 @@
 import styled from 'styled-components';
 
 export const CommunityPostReviewList = styled.div`
+  max-width: 960px;
+  margin: 0 auto;
   width: 100%;
-  margin-top: 10px;
   padding: 10px;
+  margin-bottom: 8px;
 `;
 
 export const CommunityPostReviewHeader = styled.div`
   margin-bottom: 10px;
+  display: flex;
+  align-items: flex-end;
+
   span {
     font-weight: 500;
+    color: ${(props) => props.theme.colors.primary};
+    margin-right: 6px;
+  }
+
+  div {
+    font-size: 12px;
+    color: ${(props) => props.theme.colors.tertiary};
   }
 `;
 
@@ -21,13 +33,16 @@ export const CommunityPostReviewBody = styled.div`
 
   span {
     padding: 2px;
-    color: ${(props) => props.theme.colors.secondary};
+    font-size: 14px;
+    color: ${(props) => props.theme.colors.primary};
   }
 
   button {
-    background-color: ${(props) => props.theme.colors.blueLight};
-    border: 1px solid ${(props) => props.theme.colors.border};
+    color: ${(props) => props.theme.colors.primary};
     border-radius: 4px;
-    padding: 5px;
+    transition: all 0.2s ease-in-out;
+    :hover {
+      color: ${(props) => props.theme.colors.green};
+    }
   }
 `;
