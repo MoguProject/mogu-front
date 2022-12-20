@@ -11,8 +11,7 @@ import {
   TotalUser,
 } from './styled';
 
-import type { ProjectDummyData } from '../../../../../dummy/ProjectsData';
-const ProjectMobileCard = ({ data }: { data: ProjectDummyData }) => {
+const ProjectMobileCard = ({ data }: { data: any }) => {
   return (
     <ProjectMobilCardWrapper>
       <ProjectMobileCardHeader>
@@ -37,8 +36,10 @@ const ProjectMobileCard = ({ data }: { data: ProjectDummyData }) => {
         {data.categories.length > 2
           ? data.categories
               .slice(0, 3)
-              .map((category) => <CardTags tag={category} key={category} />)
-          : data.categories.map((category) => (
+              .map((category: any) => (
+                <CardTags tag={category} key={category} />
+              ))
+          : data.categories.map((category: any) => (
               <CardTags tag={category} key={category} />
             ))}
       </TagsWrapper>

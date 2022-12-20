@@ -46,13 +46,13 @@ const MainNewContent = ({ category }: { category: string }) => {
             <MainNewContentTitle>새롭게 모집하는 프로젝트</MainNewContentTitle>
             {isDesktop ? (
               <CardCarousel>
-                {mainNewProject.content.map((item) => (
+                {mainNewProject.content.map((item: any) => (
                   <ProjectDesktopCard data={item} main={true} />
                 ))}
               </CardCarousel>
             ) : (
               <MainNewContentTabletWrapper>
-                {mainNewProject.content.map((item) => (
+                {mainNewProject.content.map((item: any) => (
                   <ProjectDesktopCard data={item} main={true} />
                 ))}
               </MainNewContentTabletWrapper>
@@ -64,13 +64,13 @@ const MainNewContent = ({ category }: { category: string }) => {
             <MainNewContentTitle>새롭게 모집하는 프로젝트</MainNewContentTitle>
             {isDesktop ? (
               <CardCarousel>
-                {mainNewStudy.content.map((item) => (
+                {mainNewStudy.content.map((item: any) => (
                   <ProjectDesktopCard data={item} main={true} />
                 ))}
               </CardCarousel>
             ) : (
               <MainNewContentTabletWrapper>
-                {mainNewStudy.content.map((item) => (
+                {mainNewStudy.content.map((item: any) => (
                   <ProjectDesktopCard data={item} main={true} />
                 ))}
               </MainNewContentTabletWrapper>

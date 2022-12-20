@@ -87,7 +87,7 @@ export const getMyPageLikedApi = () => {
     .then((response) => response.data);
 };
 
-export const myPageChangePasswordApi = (data) => {
+export const myPageChangePasswordApi = (data: any) => {
   return axiosInstance
     .put('/users/update/password', data)
     .then((res) => res.data);
