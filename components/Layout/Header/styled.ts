@@ -58,9 +58,13 @@ export const AuthNavWrapper = styled.ul`
 
   li {
     padding: 0 14px;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 500;
     color: ${(props) => props.theme.colors.primary};
     cursor: pointer;
+
+    :hover {
+      color: ${(props) => props.theme.colors.green};
+    }
   }
 `;
