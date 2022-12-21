@@ -10,14 +10,13 @@ import {
   StudyCardContents,
   StudyCardMemberNum,
 } from './styled';
-import { StudyDummyData } from '../../../../dummy/StudyData';
 
 const StudyCard = ({
   state,
   likeState,
   data,
 }: {
-  data: StudyDummyData;
+  data: any;
   state: boolean;
   likeState: boolean;
 }) => {
