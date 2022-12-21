@@ -6,6 +6,7 @@ import { QueryClient } from 'react-query';
 import axios from 'axios';
 import { dehydrate } from 'react-query';
 import { axiosInstance } from 'axiosInstance';
+import { getMainPageNewProject } from 'utils/apis/posts';
 
 const Home: NextPage = () => {
   return (
@@ -20,11 +21,15 @@ const Home: NextPage = () => {
 export default Home;
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  console.log(context.req.cookies);
   const queryClient = new QueryClient();
-  console.log('context.req:', context.req);
   const cookie = context.req ? context.req.headers.cookie : '';
   axios.defaults.headers.Cookie = '';
+  await queryClient.prefetchQuery(['mainNewProject'], () =>
+    getMainPageNewProject(4),
+  );
+  await queryClient.prefetchQuery(['mainNewStudy'], () =>
+    getMainPageNewProject(5),
+  );
   if (context.req && cookie) {
     axios.defaults.headers.Cookie = cookie;
     await queryClient.prefetchQuery(['user'], () => {
@@ -32,6 +37,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
         .get('/users/login/info')
         .then((response) => response.data);
     });
+
     return {
       props: {
         dehydratedState: JSON.parse(JSON.stringify(dehydrate(queryClient))),
@@ -39,6 +45,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     };
   }
   return {
-    props: {},
+    props: {
+      dehydratedState: JSON.parse(JSON.stringify(dehydrate(queryClient))),
+    },
   };
 };

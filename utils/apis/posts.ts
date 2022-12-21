@@ -53,3 +53,9 @@ export const updatePostDataApi = (postId: number) => {
     .post(`/posts/update/${postId}`)
     .then((response) => response.data);
 };
+
+export const getMainPageNewProject = (categoryId: number) => {
+  return axiosInstance
+    .get(`/projectstudy/list/all/${categoryId}?page=1&size=8`)
+    .then((response) => response.data);
+};

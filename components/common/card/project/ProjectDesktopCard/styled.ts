@@ -1,18 +1,26 @@
 import styled from 'styled-components';
 
-export const ProjectDesktopCardWrapper = styled.div`
+export const ProjectDesktopCardWrapper = styled.div<{ main: boolean }>`
   width: 240px;
   height: 330px;
   position: relative;
   border-radius: 8px;
   cursor: pointer;
   background-color: white;
-  box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
 
-  :hover {
-    transform: translateY(-4px);
-    transition: all 0.3s ease-in-out;
-  }
+  ${(props) =>
+    props.main
+      ? `
+        border: 1px solid ${props.theme.colors.border}
+      `
+      : `
+      box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+
+      :hover {
+        transform: translateY(-4px);
+        transition: all 0.3s ease-in-out;
+      }
+  `}
 `;
 
 export const TagsWrapper = styled.div`

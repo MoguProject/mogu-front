@@ -56,16 +56,14 @@ export const ResetButton = styled.button`
 `;
 
 export const RegistrationButton = styled.button`
-  padding: 8px 30px;
-  color: ${(props) => props.theme.colors.secondary};
-  border: 1px solid ${(props) => props.theme.colors.border};
+  padding: 8px 12px;
+  color: ${(props) => props.theme.colors.white};
+  border: none;
+  background-color: ${(props) => props.theme.colors.green};
   border-radius: 4px;
-  width: 150px;
-  margin: 20px 0;
-  position: relative;
   left: 85%;
+  font-weight: 500;
   :hover {
-    background-color: ${(props) => props.theme.colors.green};
-    color: ${(props) => props.theme.colors.white};
+    opacity: 0.7;
   }
 `;

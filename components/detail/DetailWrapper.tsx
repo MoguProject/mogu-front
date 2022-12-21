@@ -106,8 +106,10 @@ const DetailWrapper = ({
           </DetailDetailWrapper>
         </DetailPageDetail>
       )}
-      <DetailMain>{data.content}</DetailMain>
-      {data.userNickname === userInfo.nickname && (
+      <DetailMain
+        dangerouslySetInnerHTML={{ __html: data.content }}
+      ></DetailMain>
+      {/* {data.userNickname === userInfo.nickname && (
         <CommunityBtnWrapper>
           <CommnityPostEditDeleteButton onClick={updatePostPage}>
             수정하기
@@ -116,7 +118,15 @@ const DetailWrapper = ({
             삭제하기
           </CommnityPostEditDeleteButton>
         </CommunityBtnWrapper>
-      )}
+      )} */}
+      <CommunityBtnWrapper>
+        <CommnityPostEditEditButton onClick={updatePostPage}>
+          수정하기
+        </CommnityPostEditEditButton>
+        <CommnityPostEditDeleteButton onClick={deletePostData}>
+          삭제하기
+        </CommnityPostEditDeleteButton>
+      </CommunityBtnWrapper>
       <DetailCommentForm
         isLoggedIn={true}
         postId={data.postId}
@@ -222,6 +232,8 @@ const DetailDetailCenter = styled.span`
 const DetailMain = styled.div`
   padding: 2rem 0;
   min-height: 500px;
+  border-bottom: 1px solid ${(props) => props.theme.colors.border};
+  margin-bottom: 24px;
 `;
 
 const CommunityBtnWrapper = styled.div`
@@ -233,12 +245,27 @@ const CommunityBtnWrapper = styled.div`
 const CommnityPostEditDeleteButton = styled.button`
   padding: 6px 24px;
   color: ${(props) => props.theme.colors.white};
-  background-color: ${(props) => props.theme.colors.blue};
+  background-color: ${(props) => props.theme.colors.red};
   border: none;
   border-radius: 4px;
   font-weight: 700;
   margin-left: 20px;
+  transition: all 0.2s ease-in-out;
   :hover {
-    background-color: ${(props) => props.theme.colors.blueDark};
+    opacity: 0.7;
+  }
+`;
+
+const CommnityPostEditEditButton = styled.button`
+  padding: 6px 24px;
+  color: ${(props) => props.theme.colors.white};
+  background-color: ${(props) => props.theme.colors.green};
+  border: none;
+  border-radius: 4px;
+  font-weight: 700;
+  margin-left: 20px;
+  transition: all 0.2s ease-in-out;
+  :hover {
+    opacity: 0.7;
   }
 `;

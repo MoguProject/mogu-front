@@ -42,7 +42,7 @@ export interface CommunityContentInterface {
   userId: number;
   userNickname: string;
   view: number;
-  replyList: string[] | null;
+  replyList: ReplyListType[];
   postId: number;
 }
 

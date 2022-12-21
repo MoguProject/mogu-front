@@ -3,7 +3,7 @@ import dynamic from 'next/dynamic';
 import { MutableRefObject, useRef, useMemo, useState } from 'react';
 import { UseFormSetValue, UseFormTrigger } from 'react-hook-form';
 import { ReactQuillProps } from 'react-quill';
-import { FormValues } from '../cummunity';
+import { FormValues } from '../Community';
 
 interface ReactQuillPropsType extends ReactQuillProps {
   forwardedRef: any;

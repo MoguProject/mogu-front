@@ -17,6 +17,8 @@ const nextConfig = {
   },
 };
 
+module.exports = nextConfig;
+
 // module.exports = (phase, { defaultConfig }) => {
 //   const rewrites = () => {
 //     return [
